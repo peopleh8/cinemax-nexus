@@ -1,0 +1,46 @@
+model Movie {
+  id   Int    @id @default(autoincrement())
+  slug String @unique @db.VarChar(255)
+
+  title         String  @db.VarChar(255)
+  originalTitle String? @map("original_title") @db.VarChar(255)
+  excerpt       String? @db.VarChar(255)
+  description   String? @db.Text
+
+  releaseDate DateTime? @map("release_date") @db.Date
+  releaseYear Int?      @map("release_year") @db.SmallInt
+  duration    Int?      @db.SmallInt
+
+  ageRating String      @map("age_rating") @db.VarChar(10)
+  status    MovieStatus @default(DRAFT)
+
+  ratingAverage Decimal @default(0) @map("rating_average") @db.Decimal(3, 1)
+  ratingCount   Int     @default(0) @map("rating_count")
+  reviewCount   Int     @default(0) @map("review_count")
+  viewCount     Int     @default(0) @map("view_count")
+
+  isFeatured  Boolean   @default(false) @map("is_featured")
+  publishedAt DateTime? @map("published_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  genres Genre[] @relation("movie_genres")
+
+  // collections
+  // countries
+  // credits
+  // reviews
+  // posters
+  // backdrops
+  // trailers
+  // languages
+
+  @@map("movies")
+}
+
+enum MovieStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}

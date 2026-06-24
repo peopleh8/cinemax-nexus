@@ -1,0 +1,30 @@
+import { Genre } from "../../../generated/prisma/client";
+import { PaginationDto } from "../../common/dto";
+import { PrismaService } from "../../infra/prisma/prisma.service";
+import { CreateGenreDto } from './dto/create-genre.dto';
+import { UpdateGenreDto } from './dto/update-genre.dto';
+export declare class GenreService {
+    private readonly prismaService;
+    constructor(prismaService: PrismaService);
+    private getUniqueSlug;
+    findOneBySlug(slug: string): Promise<Genre>;
+    findAll(dto: PaginationDto): Promise<{
+        rows: {
+            id: number;
+            slug: string;
+            name: string;
+            description: string | null;
+            createdAt: Date;
+            updatedAt: Date;
+        }[];
+        meta: {
+            page: number;
+            limit: number;
+            total: number;
+            totalPage: number;
+        };
+    }>;
+    create(dto: CreateGenreDto): Promise<Genre>;
+    update(slug: string, dto: UpdateGenreDto): Promise<Genre>;
+    delete(slug: string): Promise<Genre>;
+}

@@ -1,0 +1,14 @@
+model Genre {
+  id   Int    @id @default(autoincrement())
+  slug String @unique @db.VarChar(255)
+
+  name        String  @db.VarChar(255)
+  description String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  movies Movie[] @relation("movie_genres")
+
+  @@map("genres")
+}

@@ -1,0 +1,5 @@
+eslint.config.mjs
+next.config.mjs
+package.json
+package-lock.json
+tsconfig.json

@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MovieController = void 0;
 const common_1 = require("@nestjs/common");
 const movie_service_1 = require("./movie.service");
-const create_movie_dto_1 = require("./dto/create-movie.dto");
-const dto_1 = require("../../common/dto");
-const update_movie_dto_1 = require("./dto/update-movie.dto");
+const dto_1 = require("./dto");
+const dto_2 = require("../../common/dto");
+const dto_3 = require("./dto");
 const platform_express_1 = require("@nestjs/platform-express");
 const constants_1 = require("../../common/constants");
 const interceptors_1 = require("../../common/interceptors");
@@ -54,7 +54,7 @@ __decorate([
     (0, common_1.Get)(),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [dto_1.PaginationDto]),
+    __metadata("design:paramtypes", [dto_2.PaginationDto]),
     __metadata("design:returntype", void 0)
 ], MovieController.prototype, "findAll", null);
 __decorate([
@@ -74,7 +74,7 @@ __decorate([
     __param(0, (0, common_1.Body)('data')),
     __param(1, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_movie_dto_1.CreateMovieDto, Object]),
+    __metadata("design:paramtypes", [dto_1.CreateMovieDto, Object]),
     __metadata("design:returntype", void 0)
 ], MovieController.prototype, "create", null);
 __decorate([
@@ -95,7 +95,7 @@ __decorate([
     __param(1, (0, common_1.Body)('data')),
     __param(2, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_movie_dto_1.UpdateMovieDto, Object]),
+    __metadata("design:paramtypes", [String, dto_3.UpdateMovieDto, Object]),
     __metadata("design:returntype", void 0)
 ], MovieController.prototype, "update", null);
 __decorate([

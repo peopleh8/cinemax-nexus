@@ -4,8 +4,8 @@ import { PaginationDto } from 'src/common/dto'
 import { Sort } from 'src/common/enums'
 import { generateUniqueSlug, getCountryCode } from 'src/common/utils'
 import { PrismaService } from 'src/infra/prisma/prisma.service'
-import { CreateCountryDto } from './dto/create-country.dto'
-import { UpdateCountryDto } from './dto/updated-country.dto'
+import { CreateCountryDto } from './dto'
+import { UpdateCountryDto } from './dto'
 
 @Injectable()
 export class CountryService {

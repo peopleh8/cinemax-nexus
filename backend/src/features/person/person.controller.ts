@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common'
 import { PersonService } from './person.service'
 import { PaginationDto } from 'src/common/dto'
-import { CreatePersonDto } from './dto/create-person.dto'
-import { UpdatePersonDto } from './dto/update-person.dto'
+import { CreatePersonDto } from './dto'
+import { UpdatePersonDto } from './dto'
 
 @Controller('people')
 export class PersonController {

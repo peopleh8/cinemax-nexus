@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common'
 import { CountryService } from './country.service'
 import { PaginationDto } from 'src/common/dto'
-import { CreateCountryDto } from './dto/create-country.dto'
-import { UpdateCountryDto } from './dto/updated-country.dto'
+import { CreateCountryDto } from './dto'
+import { UpdateCountryDto } from './dto'
 
 @Controller('countries')
 export class CountryController {

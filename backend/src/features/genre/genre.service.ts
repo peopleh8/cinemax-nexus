@@ -2,10 +2,9 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import { Genre } from 'generated/prisma/client'
 import { PaginationDto } from 'src/common/dto'
 import { Sort } from 'src/common/enums'
-// import { createSlug } from 'src/common/utils'
 import { PrismaService } from 'src/infra/prisma/prisma.service'
-import { CreateGenreDto } from './dto/create-genre.dto'
-import { UpdateGenreDto } from './dto/update-genre.dto'
+import { CreateGenreDto } from './dto'
+import { UpdateGenreDto } from './dto'
 import { generateUniqueSlug } from 'src/common/utils'
 
 @Injectable()

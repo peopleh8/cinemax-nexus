@@ -1,7 +1,7 @@
 import { GenreService } from './genre.service';
 import { PaginationDto } from "../../common/dto";
-import { CreateGenreDto } from './dto/create-genre.dto';
-import { UpdateGenreDto } from './dto/update-genre.dto';
+import { CreateGenreDto } from './dto';
+import { UpdateGenreDto } from './dto';
 export declare class GenreController {
     private readonly genreService;
     constructor(genreService: GenreService);

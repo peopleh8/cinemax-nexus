@@ -1,8 +1,8 @@
 import { Country } from "../../../generated/prisma/client";
 import { PaginationDto } from "../../common/dto";
 import { PrismaService } from "../../infra/prisma/prisma.service";
-import { CreateCountryDto } from './dto/create-country.dto';
-import { UpdateCountryDto } from './dto/updated-country.dto';
+import { CreateCountryDto } from './dto';
+import { UpdateCountryDto } from './dto';
 export declare class CountryService {
     private readonly prismaService;
     constructor(prismaService: PrismaService);

@@ -1,8 +1,8 @@
 import { Genre } from "../../../generated/prisma/client";
 import { PaginationDto } from "../../common/dto";
 import { PrismaService } from "../../infra/prisma/prisma.service";
-import { CreateGenreDto } from './dto/create-genre.dto';
-import { UpdateGenreDto } from './dto/update-genre.dto';
+import { CreateGenreDto } from './dto';
+import { UpdateGenreDto } from './dto';
 export declare class GenreService {
     private readonly prismaService;
     constructor(prismaService: PrismaService);

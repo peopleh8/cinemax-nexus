@@ -16,8 +16,8 @@ exports.PersonController = void 0;
 const common_1 = require("@nestjs/common");
 const person_service_1 = require("./person.service");
 const dto_1 = require("../../common/dto");
-const create_person_dto_1 = require("./dto/create-person.dto");
-const update_person_dto_1 = require("./dto/update-person.dto");
+const dto_2 = require("./dto");
+const dto_3 = require("./dto");
 let PersonController = class PersonController {
     personService;
     constructor(personService) {
@@ -58,7 +58,7 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_person_dto_1.CreatePersonDto]),
+    __metadata("design:paramtypes", [dto_2.CreatePersonDto]),
     __metadata("design:returntype", void 0)
 ], PersonController.prototype, "create", null);
 __decorate([
@@ -66,7 +66,7 @@ __decorate([
     __param(0, (0, common_1.Param)('slug')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_person_dto_1.UpdatePersonDto]),
+    __metadata("design:paramtypes", [String, dto_3.UpdatePersonDto]),
     __metadata("design:returntype", void 0)
 ], PersonController.prototype, "update", null);
 __decorate([

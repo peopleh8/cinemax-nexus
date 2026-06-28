@@ -12,9 +12,9 @@ import {
   UseInterceptors,
 } from '@nestjs/common'
 import { MovieService } from './movie.service'
-import { CreateMovieDto } from './dto/create-movie.dto'
+import { CreateMovieDto } from './dto'
 import { PaginationDto } from 'src/common/dto'
-import { UpdateMovieDto } from './dto/update-movie.dto'
+import { UpdateMovieDto } from './dto'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { isSupportedImageMimeType, MAX_IMAGE_SIZE } from 'src/common/constants'
 import { ParseMultipartJsonInterceptor } from 'src/common/interceptors'

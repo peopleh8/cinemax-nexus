@@ -16,8 +16,8 @@ exports.CountryController = void 0;
 const common_1 = require("@nestjs/common");
 const country_service_1 = require("./country.service");
 const dto_1 = require("../../common/dto");
-const create_country_dto_1 = require("./dto/create-country.dto");
-const updated_country_dto_1 = require("./dto/updated-country.dto");
+const dto_2 = require("./dto");
+const dto_3 = require("./dto");
 let CountryController = class CountryController {
     countryService;
     constructor(countryService) {
@@ -58,7 +58,7 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_country_dto_1.CreateCountryDto]),
+    __metadata("design:paramtypes", [dto_2.CreateCountryDto]),
     __metadata("design:returntype", void 0)
 ], CountryController.prototype, "create", null);
 __decorate([
@@ -66,7 +66,7 @@ __decorate([
     __param(0, (0, common_1.Param)('slug')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, updated_country_dto_1.UpdateCountryDto]),
+    __metadata("design:paramtypes", [String, dto_3.UpdateCountryDto]),
     __metadata("design:returntype", void 0)
 ], CountryController.prototype, "update", null);
 __decorate([

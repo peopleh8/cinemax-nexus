@@ -1,7 +1,7 @@
 import { PersonService } from './person.service';
 import { PaginationDto } from "../../common/dto";
-import { CreatePersonDto } from './dto/create-person.dto';
-import { UpdatePersonDto } from './dto/update-person.dto';
+import { CreatePersonDto } from './dto';
+import { UpdatePersonDto } from './dto';
 export declare class PersonController {
     private readonly personService;
     constructor(personService: PersonService);

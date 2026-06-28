@@ -3,9 +3,9 @@ import { Person } from 'generated/prisma/client'
 import { PaginationDto } from 'src/common/dto'
 import { Sort } from 'src/common/enums'
 import { PrismaService } from 'src/infra/prisma/prisma.service'
-import { CreatePersonDto } from './dto/create-person.dto'
+import { CreatePersonDto } from './dto'
 import { generateUniqueSlug } from 'src/common/utils'
-import { UpdatePersonDto } from './dto/update-person.dto'
+import { UpdatePersonDto } from './dto'
 
 @Injectable()
 export class PersonService {

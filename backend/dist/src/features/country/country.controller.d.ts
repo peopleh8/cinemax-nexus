@@ -1,7 +1,7 @@
 import { CountryService } from './country.service';
 import { PaginationDto } from "../../common/dto";
-import { CreateCountryDto } from './dto/create-country.dto';
-import { UpdateCountryDto } from './dto/updated-country.dto';
+import { CreateCountryDto } from './dto';
+import { UpdateCountryDto } from './dto';
 export declare class CountryController {
     private readonly countryService;
     constructor(countryService: CountryService);

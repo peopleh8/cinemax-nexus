@@ -1,8 +1,8 @@
 import { Person } from "../../../generated/prisma/client";
 import { PaginationDto } from "../../common/dto";
 import { PrismaService } from "../../infra/prisma/prisma.service";
-import { CreatePersonDto } from './dto/create-person.dto';
-import { UpdatePersonDto } from './dto/update-person.dto';
+import { CreatePersonDto } from './dto';
+import { UpdatePersonDto } from './dto';
 export declare class PersonService {
     private readonly prismaService;
     constructor(prismaService: PrismaService);

@@ -9,4 +9,5 @@ export declare class CreateMovieDto {
     status: MovieStatus;
     isFeatured: boolean;
     genreIds: number[];
+    countryIds: number[];
 }

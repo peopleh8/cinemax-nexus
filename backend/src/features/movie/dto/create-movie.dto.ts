@@ -52,10 +52,19 @@ export class CreateMovieDto {
   @IsBoolean()
   isFeatured!: boolean
 
+  @IsOptional()
   @IsArray()
   @ArrayNotEmpty()
   @Type(() => Number)
   @IsInt({ each: true })
   @IsPositive({ each: true })
   genreIds!: number[]
+
+  @IsOptional()
+  @IsArray()
+  @ArrayNotEmpty()
+  @Type(() => Number)
+  @IsInt({ each: true })
+  @IsPositive({ each: true })
+  countryIds!: number[]
 }

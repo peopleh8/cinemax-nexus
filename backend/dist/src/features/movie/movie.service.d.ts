@@ -10,22 +10,22 @@ export declare class MovieService {
     findOneBySlug(slug: string, isForAdmin?: boolean): Promise<Movie>;
     findAll(dto: PaginationDto, isForAdmin?: boolean): Promise<{
         rows: {
-            id: number;
-            slug: string;
             title: string;
             originalTitle: string | null;
-            excerpt: string | null;
             description: string | null;
             releaseDate: Date | null;
             releaseYear: number | null;
-            duration: number | null;
             ageRating: string;
             status: MovieStatus;
+            isFeatured: boolean;
+            id: number;
+            slug: string;
+            excerpt: string | null;
+            duration: number | null;
             ratingAverage: import("@prisma/client-runtime-utils").Decimal;
             ratingCount: number;
             reviewCount: number;
             viewCount: number;
-            isFeatured: boolean;
             publishedAt: Date | null;
             createdAt: Date;
             updatedAt: Date;

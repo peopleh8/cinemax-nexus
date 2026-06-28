@@ -23,6 +23,7 @@ class CreateMovieDto {
     status;
     isFeatured;
     genreIds;
+    countryIds;
 }
 exports.CreateMovieDto = CreateMovieDto;
 __decorate([
@@ -71,6 +72,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], CreateMovieDto.prototype, "isFeatured", void 0);
 __decorate([
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.ArrayNotEmpty)(),
     (0, class_transformer_1.Type)(() => Number),
@@ -78,4 +80,13 @@ __decorate([
     (0, class_validator_1.IsPositive)({ each: true }),
     __metadata("design:type", Array)
 ], CreateMovieDto.prototype, "genreIds", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ArrayNotEmpty)(),
+    (0, class_transformer_1.Type)(() => Number),
+    (0, class_validator_1.IsInt)({ each: true }),
+    (0, class_validator_1.IsPositive)({ each: true }),
+    __metadata("design:type", Array)
+], CreateMovieDto.prototype, "countryIds", void 0);
 //# sourceMappingURL=create-movie.dto.js.map

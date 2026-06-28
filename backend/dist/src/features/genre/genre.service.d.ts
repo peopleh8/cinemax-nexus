@@ -10,12 +10,12 @@ export declare class GenreService {
     findOneBySlug(slug: string): Promise<Genre>;
     findAll(dto: PaginationDto): Promise<{
         rows: {
+            description: string | null;
             id: number;
             slug: string;
-            name: string;
-            description: string | null;
             createdAt: Date;
             updatedAt: Date;
+            name: string;
         }[];
         meta: {
             page: number;

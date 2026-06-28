@@ -25,7 +25,8 @@ model Movie {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  genres Genre[] @relation("movie_genres")
+  genres    Genre[]   @relation("movie_genres")
+  countries Country[] @relation("movie_countries")
 
   // collections
   // countries

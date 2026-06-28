@@ -10,12 +10,13 @@ exports.FeaturesModule = void 0;
 const common_1 = require("@nestjs/common");
 const movie_module_1 = require("./movie/movie.module");
 const genre_module_1 = require("./genre/genre.module");
+const country_module_1 = require("./country/country.module");
 let FeaturesModule = class FeaturesModule {
 };
 exports.FeaturesModule = FeaturesModule;
 exports.FeaturesModule = FeaturesModule = __decorate([
     (0, common_1.Module)({
-        imports: [movie_module_1.MovieModule, genre_module_1.GenreModule],
+        imports: [movie_module_1.MovieModule, genre_module_1.GenreModule, country_module_1.CountryModule],
         controllers: [],
         providers: [],
     })

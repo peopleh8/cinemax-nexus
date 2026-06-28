@@ -11,6 +11,7 @@ export declare const DbNull: import("@prisma/client-runtime-utils").DbNullClass;
 export declare const JsonNull: import("@prisma/client-runtime-utils").JsonNullClass;
 export declare const AnyNull: import("@prisma/client-runtime-utils").AnyNullClass;
 export declare const ModelName: {
+    readonly Country: "Country";
     readonly Genre: "Genre";
     readonly Movie: "Movie";
 };
@@ -22,6 +23,15 @@ export declare const TransactionIsolationLevel: {
     readonly Serializable: "Serializable";
 };
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
+export declare const CountryScalarFieldEnum: {
+    readonly id: "id";
+    readonly slug: "slug";
+    readonly name: "name";
+    readonly code: "code";
+    readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
+};
+export type CountryScalarFieldEnum = (typeof CountryScalarFieldEnum)[keyof typeof CountryScalarFieldEnum];
 export declare const GenreScalarFieldEnum: {
     readonly id: "id";
     readonly slug: "slug";

@@ -6,21 +6,21 @@ export declare class GenreController {
     private readonly genreService;
     constructor(genreService: GenreService);
     findOneBySlug(slug: string): Promise<{
-        name: string;
+        description: string | null;
         id: number;
         slug: string;
-        description: string | null;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
     }>;
     findAll(query: PaginationDto): Promise<{
         rows: {
-            name: string;
+            description: string | null;
             id: number;
             slug: string;
-            description: string | null;
             createdAt: Date;
             updatedAt: Date;
+            name: string;
         }[];
         meta: {
             page: number;
@@ -30,27 +30,27 @@ export declare class GenreController {
         };
     }>;
     create(dto: CreateGenreDto): Promise<{
-        name: string;
+        description: string | null;
         id: number;
         slug: string;
-        description: string | null;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
     }>;
     update(slug: string, dto: UpdateGenreDto): Promise<{
-        name: string;
+        description: string | null;
         id: number;
         slug: string;
-        description: string | null;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
     }>;
     delete(slug: string): Promise<{
-        name: string;
+        description: string | null;
         id: number;
         slug: string;
-        description: string | null;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
     }>;
 }

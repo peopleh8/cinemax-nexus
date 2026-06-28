@@ -1,0 +1,14 @@
+model Country {
+  id   Int    @id @default(autoincrement())
+  slug String @unique @db.VarChar(255)
+
+  name String @db.VarChar(255)
+  code String @db.VarChar(255)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  movies Movie[] @relation("movie_countries")
+
+  @@map("countries")
+}

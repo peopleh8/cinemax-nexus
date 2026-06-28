@@ -30,6 +30,9 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
     $extends: runtime.Types.Extensions.ExtendsHook<"extends", Prisma.TypeMapCb<OmitOpts>, ExtArgs, runtime.Types.Utils.Call<Prisma.TypeMapCb<OmitOpts>, {
         extArgs: ExtArgs;
     }>>;
+    get country(): Prisma.CountryDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
     get genre(): Prisma.GenreDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;

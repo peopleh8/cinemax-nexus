@@ -2,5 +2,6 @@ import * as Prisma from './internal/prismaNamespaceBrowser.js';
 export { Prisma };
 export * as $Enums from './enums.js';
 export * from './enums.js';
+export type Country = Prisma.CountryModel;
 export type Genre = Prisma.GenreModel;
 export type Movie = Prisma.MovieModel;

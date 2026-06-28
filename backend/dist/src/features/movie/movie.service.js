@@ -38,6 +38,7 @@ let MovieService = class MovieService {
             where: { slug, ...(isForAdmin ? {} : { status: client_1.MovieStatus.PUBLISHED }) },
             include: {
                 genres: true,
+                countries: true,
             },
         });
         if (!movie) {
@@ -76,15 +77,23 @@ let MovieService = class MovieService {
         };
     }
     async create(dto) {
-        const { genreIds, ...movieData } = dto;
+        const { genreIds, countryIds, ...movieData } = dto;
         const slug = await this.getUniqueSlug(dto.title);
         const uniqueGenres = [...new Set(genreIds)];
+        const uniqueCountries = [...new Set(countryIds)];
         const genres = await this.prismaService.genre.findMany({
             where: { id: { in: uniqueGenres } },
             select: { id: true },
         });
+        const countries = await this.prismaService.country.findMany({
+            where: { id: { in: uniqueCountries } },
+            select: { id: true },
+        });
         if (genres.length !== uniqueGenres.length) {
             throw new common_1.NotFoundException('One or more genres not found');
+        }
+        if (countries.length !== uniqueCountries.length) {
+            throw new common_1.NotFoundException('One or more countries not found');
         }
         const movie = await this.prismaService.movie.create({
             data: {
@@ -93,25 +102,39 @@ let MovieService = class MovieService {
                 genres: {
                     connect: genres,
                 },
+                countries: {
+                    connect: countries,
+                },
             },
             include: {
                 genres: true,
+                countries: true,
             },
         });
         return movie;
     }
     async update(slug, dto) {
-        const { genreIds, ...movieData } = dto;
+        const { genreIds, countryIds, ...movieData } = dto;
         const movie = await this.findOneBySlug(slug, true);
         const uniqueGenres = [...new Set(genreIds)];
+        const uniqueCountries = [...new Set(countryIds)];
         const genres = genreIds !== undefined
             ? await this.prismaService.genre.findMany({
                 where: { id: { in: uniqueGenres } },
                 select: { id: true },
             })
             : undefined;
+        const countries = countryIds !== undefined
+            ? await this.prismaService.country.findMany({
+                where: { id: { in: uniqueCountries } },
+                select: { id: true },
+            })
+            : undefined;
         if (genreIds !== undefined && genres && genres.length !== uniqueGenres.length) {
             throw new common_1.NotFoundException('One or more genres not found');
+        }
+        if (countryIds !== undefined && countries && countries.length !== uniqueCountries.length) {
+            throw new common_1.NotFoundException('One or more countries not found');
         }
         const updatedMovie = await this.prismaService.movie.update({
             where: { slug: movie.slug },
@@ -124,9 +147,17 @@ let MovieService = class MovieService {
                         },
                     }
                     : {}),
+                ...(countries
+                    ? {
+                        countries: {
+                            set: countries,
+                        },
+                    }
+                    : {}),
             },
             include: {
                 genres: true,
+                countries: true,
             },
         });
         return updatedMovie;

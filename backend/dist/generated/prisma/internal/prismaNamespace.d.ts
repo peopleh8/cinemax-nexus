@@ -157,6 +157,7 @@ export type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? n
 export type FieldRef<Model, FieldType> = runtime.FieldRef<Model, FieldType>;
 type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRef<Model, FieldType>;
 export declare const ModelName: {
+    readonly Country: "Country";
     readonly Genre: "Genre";
     readonly Movie: "Movie";
 };
@@ -171,10 +172,84 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         omit: GlobalOmitOptions;
     };
     meta: {
-        modelProps: "genre" | "movie";
+        modelProps: "country" | "genre" | "movie";
         txIsolationLevel: TransactionIsolationLevel;
     };
     model: {
+        Country: {
+            payload: Prisma.$CountryPayload<ExtArgs>;
+            fields: Prisma.CountryFieldRefs;
+            operations: {
+                findUnique: {
+                    args: Prisma.CountryFindUniqueArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$CountryPayload> | null;
+                };
+                findUniqueOrThrow: {
+                    args: Prisma.CountryFindUniqueOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$CountryPayload>;
+                };
+                findFirst: {
+                    args: Prisma.CountryFindFirstArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$CountryPayload> | null;
+                };
+                findFirstOrThrow: {
+                    args: Prisma.CountryFindFirstOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$CountryPayload>;
+                };
+                findMany: {
+                    args: Prisma.CountryFindManyArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$CountryPayload>[];
+                };
+                create: {
+                    args: Prisma.CountryCreateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$CountryPayload>;
+                };
+                createMany: {
+                    args: Prisma.CountryCreateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                createManyAndReturn: {
+                    args: Prisma.CountryCreateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$CountryPayload>[];
+                };
+                delete: {
+                    args: Prisma.CountryDeleteArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$CountryPayload>;
+                };
+                update: {
+                    args: Prisma.CountryUpdateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$CountryPayload>;
+                };
+                deleteMany: {
+                    args: Prisma.CountryDeleteManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateMany: {
+                    args: Prisma.CountryUpdateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateManyAndReturn: {
+                    args: Prisma.CountryUpdateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$CountryPayload>[];
+                };
+                upsert: {
+                    args: Prisma.CountryUpsertArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$CountryPayload>;
+                };
+                aggregate: {
+                    args: Prisma.CountryAggregateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.AggregateCountry>;
+                };
+                groupBy: {
+                    args: Prisma.CountryGroupByArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.CountryGroupByOutputType>[];
+                };
+                count: {
+                    args: Prisma.CountryCountArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.CountryCountAggregateOutputType> | number;
+                };
+            };
+        };
         Genre: {
             payload: Prisma.$GenrePayload<ExtArgs>;
             fields: Prisma.GenreFieldRefs;
@@ -354,6 +429,15 @@ export declare const TransactionIsolationLevel: {
     readonly Serializable: "Serializable";
 };
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
+export declare const CountryScalarFieldEnum: {
+    readonly id: "id";
+    readonly slug: "slug";
+    readonly name: "name";
+    readonly code: "code";
+    readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
+};
+export type CountryScalarFieldEnum = (typeof CountryScalarFieldEnum)[keyof typeof CountryScalarFieldEnum];
 export declare const GenreScalarFieldEnum: {
     readonly id: "id";
     readonly slug: "slug";
@@ -438,6 +522,7 @@ export type PrismaClientOptions = ({
     queryPlanCacheMaxSize?: number;
 };
 export type GlobalOmitConfig = {
+    country?: Prisma.CountryOmit;
     genre?: Prisma.GenreOmit;
     movie?: Prisma.MovieOmit;
 };

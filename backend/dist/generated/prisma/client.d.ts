@@ -8,4 +8,7 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma };
 export type Country = Prisma.CountryModel;
 export type Genre = Prisma.GenreModel;
+export type MovieCredit = Prisma.MovieCreditModel;
+export type MoviePoster = Prisma.MoviePosterModel;
 export type Movie = Prisma.MovieModel;
+export type Person = Prisma.PersonModel;

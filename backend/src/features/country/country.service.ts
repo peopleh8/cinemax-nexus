@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { Country } from 'generated/prisma/client'
 import { PaginationDto } from 'src/common/dto'
 import { Sort } from 'src/common/enums'
-import { createSlug, getCountryCode } from 'src/common/utils'
+import { generateUniqueSlug, getCountryCode } from 'src/common/utils'
 import { PrismaService } from 'src/infra/prisma/prisma.service'
 import { CreateCountryDto } from './dto/create-country.dto'
 import { UpdateCountryDto } from './dto/updated-country.dto'
@@ -10,25 +10,6 @@ import { UpdateCountryDto } from './dto/updated-country.dto'
 @Injectable()
 export class CountryService {
   constructor(private readonly prismaService: PrismaService) {}
-
-  private async getUniqueSlug(title: string) {
-    const baseSlug = createSlug(title)
-
-    let slug = baseSlug
-    let counter = 2
-
-    while (
-      await this.prismaService.country.findUnique({
-        where: { slug },
-        select: { id: true },
-      })
-    ) {
-      slug = `${baseSlug}-${counter}`
-      counter += 1
-    }
-
-    return slug
-  }
 
   async findOneBySlug(slug: string): Promise<Country> {
     const country = await this.prismaService.country.findUnique({
@@ -69,8 +50,16 @@ export class CountryService {
   }
 
   async create(dto: CreateCountryDto): Promise<Country> {
-    const slug = await this.getUniqueSlug(dto.name)
     const code = getCountryCode(dto.name)
+
+    const slug = await generateUniqueSlug(
+      dto.name,
+      async (slug) =>
+        await this.prismaService.country.findUnique({
+          where: { slug },
+          select: { id: true },
+        }),
+    )
 
     if (!code) {
       throw new BadRequestException(`Country code for "${dto.name}" not found`)

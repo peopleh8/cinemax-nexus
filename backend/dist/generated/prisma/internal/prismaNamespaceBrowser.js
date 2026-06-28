@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.MovieScalarFieldEnum = exports.GenreScalarFieldEnum = exports.CountryScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
+exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.PersonScalarFieldEnum = exports.MovieScalarFieldEnum = exports.MoviePosterScalarFieldEnum = exports.MovieCreditScalarFieldEnum = exports.GenreScalarFieldEnum = exports.CountryScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/index-browser"));
 exports.Decimal = runtime.Decimal;
 exports.NullTypes = {
@@ -47,7 +47,10 @@ exports.AnyNull = runtime.AnyNull;
 exports.ModelName = {
     Country: 'Country',
     Genre: 'Genre',
-    Movie: 'Movie'
+    MovieCredit: 'MovieCredit',
+    MoviePoster: 'MoviePoster',
+    Movie: 'Movie',
+    Person: 'Person'
 };
 exports.TransactionIsolationLevel = runtime.makeStrictEnum({
     ReadUncommitted: 'ReadUncommitted',
@@ -71,6 +74,22 @@ exports.GenreScalarFieldEnum = {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };
+exports.MovieCreditScalarFieldEnum = {
+    id: 'id',
+    movieId: 'movieId',
+    personId: 'personId',
+    role: 'role',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.MoviePosterScalarFieldEnum = {
+    id: 'id',
+    movieId: 'movieId',
+    url: 'url',
+    storageKey: 'storageKey',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
 exports.MovieScalarFieldEnum = {
     id: 'id',
     slug: 'slug',
@@ -89,6 +108,15 @@ exports.MovieScalarFieldEnum = {
     viewCount: 'viewCount',
     isFeatured: 'isFeatured',
     publishedAt: 'publishedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.PersonScalarFieldEnum = {
+    id: 'id',
+    slug: 'slug',
+    name: 'name',
+    bio: 'bio',
+    birthDate: 'birthDate',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };

@@ -6,21 +6,21 @@ export declare class CountryController {
     private readonly countryService;
     constructor(countryService: CountryService);
     findOneBySlug(slug: string): Promise<{
+        code: string;
         id: number;
         slug: string;
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        code: string;
     }>;
     findAll(dto: PaginationDto): Promise<{
         rows: {
+            code: string;
             id: number;
             slug: string;
             createdAt: Date;
             updatedAt: Date;
             name: string;
-            code: string;
         }[];
         meta: {
             total: number;
@@ -30,27 +30,27 @@ export declare class CountryController {
         };
     }>;
     create(dto: CreateCountryDto): Promise<{
+        code: string;
         id: number;
         slug: string;
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        code: string;
     }>;
     update(slug: string, dto: UpdateCountryDto): Promise<{
+        code: string;
         id: number;
         slug: string;
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        code: string;
     }>;
     delete(slug: string): Promise<{
+        code: string;
         id: number;
         slug: string;
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        code: string;
     }>;
 }

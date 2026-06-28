@@ -1,6 +1,7 @@
 import { Type } from 'class-transformer'
 import {
   ArrayNotEmpty,
+  ArrayUnique,
   IsArray,
   IsBoolean,
   IsDate,
@@ -11,8 +12,10 @@ import {
   IsPositive,
   IsString,
   Length,
+  ValidateNested,
 } from 'class-validator'
 import { MovieStatus } from 'generated/prisma/enums'
+import { CreateMovieCreditInputDto } from './create-movie-credits-input.dto'
 
 export class CreateMovieDto {
   @IsNotEmpty()
@@ -36,6 +39,7 @@ export class CreateMovieDto {
 
   @IsOptional()
   @IsInt()
+  @Type(() => Number)
   @IsPositive()
   releaseYear!: number
 
@@ -49,6 +53,7 @@ export class CreateMovieDto {
   status!: MovieStatus
 
   @IsOptional()
+  @Type(() => Boolean)
   @IsBoolean()
   isFeatured!: boolean
 
@@ -67,4 +72,12 @@ export class CreateMovieDto {
   @IsInt({ each: true })
   @IsPositive({ each: true })
   countryIds!: number[]
+
+  @IsOptional()
+  @IsArray()
+  @ArrayNotEmpty()
+  @ValidateNested({ each: true })
+  @Type(() => CreateMovieCreditInputDto)
+  @ArrayUnique((credit: CreateMovieCreditInputDto) => `${credit.personId}-${credit.role}`)
+  credits!: CreateMovieCreditInputDto[]
 }

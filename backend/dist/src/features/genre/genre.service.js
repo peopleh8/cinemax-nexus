@@ -12,25 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GenreService = void 0;
 const common_1 = require("@nestjs/common");
 const enums_1 = require("../../common/enums");
-const utils_1 = require("../../common/utils");
 const prisma_service_1 = require("../../infra/prisma/prisma.service");
+const utils_1 = require("../../common/utils");
 let GenreService = class GenreService {
     prismaService;
     constructor(prismaService) {
         this.prismaService = prismaService;
-    }
-    async getUniqueSlug(title) {
-        const baseSlug = (0, utils_1.createSlug)(title);
-        let slug = baseSlug;
-        let counter = 2;
-        while (await this.prismaService.genre.findUnique({
-            where: { slug },
-            select: { id: true },
-        })) {
-            slug = `${baseSlug}-${counter}`;
-            counter += 1;
-        }
-        return slug;
     }
     async findOneBySlug(slug) {
         const genre = await this.prismaService.genre.findUnique({
@@ -65,14 +52,17 @@ let GenreService = class GenreService {
         };
     }
     async create(dto) {
-        const slug = await this.getUniqueSlug(dto.name);
-        const movie = await this.prismaService.genre.create({
+        const slug = await (0, utils_1.generateUniqueSlug)(dto.name, async (slug) => await this.prismaService.genre.findUnique({
+            where: { slug },
+            select: { id: true },
+        }));
+        const genre = await this.prismaService.genre.create({
             data: {
                 ...dto,
                 slug,
             },
         });
-        return movie;
+        return genre;
     }
     async update(slug, dto) {
         const genre = await this.findOneBySlug(slug);

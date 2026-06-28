@@ -2,33 +2,15 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import { Genre } from 'generated/prisma/client'
 import { PaginationDto } from 'src/common/dto'
 import { Sort } from 'src/common/enums'
-import { createSlug } from 'src/common/utils'
+// import { createSlug } from 'src/common/utils'
 import { PrismaService } from 'src/infra/prisma/prisma.service'
 import { CreateGenreDto } from './dto/create-genre.dto'
 import { UpdateGenreDto } from './dto/update-genre.dto'
+import { generateUniqueSlug } from 'src/common/utils'
 
 @Injectable()
 export class GenreService {
   constructor(private readonly prismaService: PrismaService) {}
-
-  private async getUniqueSlug(title: string) {
-    const baseSlug = createSlug(title)
-
-    let slug = baseSlug
-    let counter = 2
-
-    while (
-      await this.prismaService.genre.findUnique({
-        where: { slug },
-        select: { id: true },
-      })
-    ) {
-      slug = `${baseSlug}-${counter}`
-      counter += 1
-    }
-
-    return slug
-  }
 
   async findOneBySlug(slug: string): Promise<Genre> {
     const genre = await this.prismaService.genre.findUnique({
@@ -69,16 +51,23 @@ export class GenreService {
   }
 
   async create(dto: CreateGenreDto): Promise<Genre> {
-    const slug = await this.getUniqueSlug(dto.name)
+    const slug = await generateUniqueSlug(
+      dto.name,
+      async (slug) =>
+        await this.prismaService.genre.findUnique({
+          where: { slug },
+          select: { id: true },
+        }),
+    )
 
-    const movie = await this.prismaService.genre.create({
+    const genre = await this.prismaService.genre.create({
       data: {
         ...dto,
         slug,
       },
     })
 
-    return movie
+    return genre
   }
 
   async update(slug: string, dto: UpdateGenreDto): Promise<Genre> {

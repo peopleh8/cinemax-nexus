@@ -5,8 +5,8 @@ model Country {
   name String @db.VarChar(255)
   code String @db.VarChar(255)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   movies Movie[] @relation("movie_countries")
 

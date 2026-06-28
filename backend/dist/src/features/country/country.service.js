@@ -19,19 +19,6 @@ let CountryService = class CountryService {
     constructor(prismaService) {
         this.prismaService = prismaService;
     }
-    async getUniqueSlug(title) {
-        const baseSlug = (0, utils_1.createSlug)(title);
-        let slug = baseSlug;
-        let counter = 2;
-        while (await this.prismaService.country.findUnique({
-            where: { slug },
-            select: { id: true },
-        })) {
-            slug = `${baseSlug}-${counter}`;
-            counter += 1;
-        }
-        return slug;
-    }
     async findOneBySlug(slug) {
         const country = await this.prismaService.country.findUnique({
             where: { slug },
@@ -65,8 +52,11 @@ let CountryService = class CountryService {
         };
     }
     async create(dto) {
-        const slug = await this.getUniqueSlug(dto.name);
         const code = (0, utils_1.getCountryCode)(dto.name);
+        const slug = await (0, utils_1.generateUniqueSlug)(dto.name, async (slug) => await this.prismaService.country.findUnique({
+            where: { slug },
+            select: { id: true },
+        }));
         if (!code) {
             throw new common_1.BadRequestException(`Country code for "${dto.name}" not found`);
         }

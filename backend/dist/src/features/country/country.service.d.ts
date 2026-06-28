@@ -6,16 +6,15 @@ import { UpdateCountryDto } from './dto/updated-country.dto';
 export declare class CountryService {
     private readonly prismaService;
     constructor(prismaService: PrismaService);
-    private getUniqueSlug;
     findOneBySlug(slug: string): Promise<Country>;
     findAll(dto: PaginationDto): Promise<{
         rows: {
+            code: string;
             id: number;
             slug: string;
             createdAt: Date;
             updatedAt: Date;
             name: string;
-            code: string;
         }[];
         meta: {
             total: number;

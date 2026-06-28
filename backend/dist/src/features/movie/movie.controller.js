@@ -18,6 +18,9 @@ const movie_service_1 = require("./movie.service");
 const create_movie_dto_1 = require("./dto/create-movie.dto");
 const dto_1 = require("../../common/dto");
 const update_movie_dto_1 = require("./dto/update-movie.dto");
+const platform_express_1 = require("@nestjs/platform-express");
+const constants_1 = require("../../common/constants");
+const interceptors_1 = require("../../common/interceptors");
 let MovieController = class MovieController {
     movieService;
     constructor(movieService) {
@@ -29,11 +32,11 @@ let MovieController = class MovieController {
     findAll(query) {
         return this.movieService.findAll(query);
     }
-    create(dto) {
-        return this.movieService.create(dto);
+    create(dto, poster) {
+        return this.movieService.create(dto, poster);
     }
-    update(slug, dto) {
-        return this.movieService.update(slug, dto);
+    update(slug, dto, poster) {
+        return this.movieService.update(slug, dto, poster);
     }
     delete(slug) {
         return this.movieService.delete(slug);
@@ -56,17 +59,43 @@ __decorate([
 ], MovieController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('poster', {
+        limits: {
+            fileSize: constants_1.MAX_IMAGE_SIZE,
+        },
+        fileFilter: (_request, file, callback) => {
+            if (!(0, constants_1.isSupportedImageMimeType)(file.mimetype)) {
+                callback(new common_1.BadRequestException('Only JPG, PNG and WEBP poster images are supported'), false);
+                return;
+            }
+            callback(null, true);
+        },
+    }), new interceptors_1.ParseMultipartJsonInterceptor('data')),
+    __param(0, (0, common_1.Body)('data')),
+    __param(1, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_movie_dto_1.CreateMovieDto]),
+    __metadata("design:paramtypes", [create_movie_dto_1.CreateMovieDto, Object]),
     __metadata("design:returntype", void 0)
 ], MovieController.prototype, "create", null);
 __decorate([
     (0, common_1.Put)(':slug'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('poster', {
+        limits: {
+            fileSize: constants_1.MAX_IMAGE_SIZE,
+        },
+        fileFilter: (_request, file, callback) => {
+            if (!(0, constants_1.isSupportedImageMimeType)(file.mimetype)) {
+                callback(new common_1.BadRequestException('Only JPG, PNG and WEBP poster images are supported'), false);
+                return;
+            }
+            callback(null, true);
+        },
+    }), new interceptors_1.ParseMultipartJsonInterceptor('data')),
     __param(0, (0, common_1.Param)('slug')),
-    __param(1, (0, common_1.Body)()),
+    __param(1, (0, common_1.Body)('data')),
+    __param(2, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_movie_dto_1.UpdateMovieDto]),
+    __metadata("design:paramtypes", [String, update_movie_dto_1.UpdateMovieDto, Object]),
     __metadata("design:returntype", void 0)
 ], MovieController.prototype, "update", null);
 __decorate([

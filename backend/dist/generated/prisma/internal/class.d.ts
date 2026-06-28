@@ -36,7 +36,16 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
     get genre(): Prisma.GenreDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;
+    get movieCredit(): Prisma.MovieCreditDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    get moviePoster(): Prisma.MoviePosterDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
     get movie(): Prisma.MovieDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    get person(): Prisma.PersonDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;
 }

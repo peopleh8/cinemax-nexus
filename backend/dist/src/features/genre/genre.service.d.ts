@@ -6,7 +6,6 @@ import { UpdateGenreDto } from './dto/update-genre.dto';
 export declare class GenreService {
     private readonly prismaService;
     constructor(prismaService: PrismaService);
-    private getUniqueSlug;
     findOneBySlug(slug: string): Promise<Genre>;
     findAll(dto: PaginationDto): Promise<{
         rows: {

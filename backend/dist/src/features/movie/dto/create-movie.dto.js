@@ -13,6 +13,7 @@ exports.CreateMovieDto = void 0;
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../../../../generated/prisma/enums");
+const create_movie_credits_input_dto_1 = require("./create-movie-credits-input.dto");
 class CreateMovieDto {
     title;
     originalTitle;
@@ -24,6 +25,7 @@ class CreateMovieDto {
     isFeatured;
     genreIds;
     countryIds;
+    credits;
 }
 exports.CreateMovieDto = CreateMovieDto;
 __decorate([
@@ -52,6 +54,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsInt)(),
+    (0, class_transformer_1.Type)(() => Number),
     (0, class_validator_1.IsPositive)(),
     __metadata("design:type", Number)
 ], CreateMovieDto.prototype, "releaseYear", void 0);
@@ -68,6 +71,7 @@ __decorate([
 ], CreateMovieDto.prototype, "status", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
+    (0, class_transformer_1.Type)(() => Boolean),
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateMovieDto.prototype, "isFeatured", void 0);
@@ -89,4 +93,13 @@ __decorate([
     (0, class_validator_1.IsPositive)({ each: true }),
     __metadata("design:type", Array)
 ], CreateMovieDto.prototype, "countryIds", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ArrayNotEmpty)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => create_movie_credits_input_dto_1.CreateMovieCreditInputDto),
+    (0, class_validator_1.ArrayUnique)((credit) => `${credit.personId}-${credit.role}`),
+    __metadata("design:type", Array)
+], CreateMovieDto.prototype, "credits", void 0);
 //# sourceMappingURL=create-movie.dto.js.map

@@ -1,0 +1,16 @@
+model MovieCredit {
+  id Int @id @default(autoincrement())
+
+  movieId  Int @unique @map("movie_id")
+  personId Int @unique @map("person_id")
+
+  role CreditRole
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  person Person @relation("person_credits", fields: [personId], references: [id], onDelete: Cascade)
+  movie  Movie  @relation("movie_credits", fields: [movieId], references: [id], onDelete: Cascade)
+
+  @@map("movie_credit")
+}

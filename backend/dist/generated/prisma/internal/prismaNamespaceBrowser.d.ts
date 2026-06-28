@@ -13,7 +13,10 @@ export declare const AnyNull: import("@prisma/client-runtime-utils").AnyNullClas
 export declare const ModelName: {
     readonly Country: "Country";
     readonly Genre: "Genre";
+    readonly MovieCredit: "MovieCredit";
+    readonly MoviePoster: "MoviePoster";
     readonly Movie: "Movie";
+    readonly Person: "Person";
 };
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 export declare const TransactionIsolationLevel: {
@@ -41,6 +44,24 @@ export declare const GenreScalarFieldEnum: {
     readonly updatedAt: "updatedAt";
 };
 export type GenreScalarFieldEnum = (typeof GenreScalarFieldEnum)[keyof typeof GenreScalarFieldEnum];
+export declare const MovieCreditScalarFieldEnum: {
+    readonly id: "id";
+    readonly movieId: "movieId";
+    readonly personId: "personId";
+    readonly role: "role";
+    readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
+};
+export type MovieCreditScalarFieldEnum = (typeof MovieCreditScalarFieldEnum)[keyof typeof MovieCreditScalarFieldEnum];
+export declare const MoviePosterScalarFieldEnum: {
+    readonly id: "id";
+    readonly movieId: "movieId";
+    readonly url: "url";
+    readonly storageKey: "storageKey";
+    readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
+};
+export type MoviePosterScalarFieldEnum = (typeof MoviePosterScalarFieldEnum)[keyof typeof MoviePosterScalarFieldEnum];
 export declare const MovieScalarFieldEnum: {
     readonly id: "id";
     readonly slug: "slug";
@@ -63,6 +84,16 @@ export declare const MovieScalarFieldEnum: {
     readonly updatedAt: "updatedAt";
 };
 export type MovieScalarFieldEnum = (typeof MovieScalarFieldEnum)[keyof typeof MovieScalarFieldEnum];
+export declare const PersonScalarFieldEnum: {
+    readonly id: "id";
+    readonly slug: "slug";
+    readonly name: "name";
+    readonly bio: "bio";
+    readonly birthDate: "birthDate";
+    readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
+};
+export type PersonScalarFieldEnum = (typeof PersonScalarFieldEnum)[keyof typeof PersonScalarFieldEnum];
 export declare const SortOrder: {
     readonly asc: "asc";
     readonly desc: "desc";

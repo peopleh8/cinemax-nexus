@@ -115,6 +115,21 @@ export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     _min?: Prisma.NestedStringNullableFilter<$PrismaModel>;
     _max?: Prisma.NestedStringNullableFilter<$PrismaModel>;
 };
+export type EnumCreditRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.CreditRole | Prisma.EnumCreditRoleFieldRefInput<$PrismaModel>;
+    in?: $Enums.CreditRole[] | Prisma.ListEnumCreditRoleFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.CreditRole[] | Prisma.ListEnumCreditRoleFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumCreditRoleFilter<$PrismaModel> | $Enums.CreditRole;
+};
+export type EnumCreditRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CreditRole | Prisma.EnumCreditRoleFieldRefInput<$PrismaModel>;
+    in?: $Enums.CreditRole[] | Prisma.ListEnumCreditRoleFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.CreditRole[] | Prisma.ListEnumCreditRoleFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumCreditRoleWithAggregatesFilter<$PrismaModel> | $Enums.CreditRole;
+    _count?: Prisma.NestedIntFilter<$PrismaModel>;
+    _min?: Prisma.NestedEnumCreditRoleFilter<$PrismaModel>;
+    _max?: Prisma.NestedEnumCreditRoleFilter<$PrismaModel>;
+};
 export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null;
     in?: Date[] | string[] | Prisma.ListDateTimeFieldRefInput<$PrismaModel> | null;
@@ -339,6 +354,21 @@ export type NestedIntNullableFilter<$PrismaModel = never> = {
     gt?: number | Prisma.IntFieldRefInput<$PrismaModel>;
     gte?: number | Prisma.IntFieldRefInput<$PrismaModel>;
     not?: Prisma.NestedIntNullableFilter<$PrismaModel> | number | null;
+};
+export type NestedEnumCreditRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.CreditRole | Prisma.EnumCreditRoleFieldRefInput<$PrismaModel>;
+    in?: $Enums.CreditRole[] | Prisma.ListEnumCreditRoleFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.CreditRole[] | Prisma.ListEnumCreditRoleFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumCreditRoleFilter<$PrismaModel> | $Enums.CreditRole;
+};
+export type NestedEnumCreditRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CreditRole | Prisma.EnumCreditRoleFieldRefInput<$PrismaModel>;
+    in?: $Enums.CreditRole[] | Prisma.ListEnumCreditRoleFieldRefInput<$PrismaModel>;
+    notIn?: $Enums.CreditRole[] | Prisma.ListEnumCreditRoleFieldRefInput<$PrismaModel>;
+    not?: Prisma.NestedEnumCreditRoleWithAggregatesFilter<$PrismaModel> | $Enums.CreditRole;
+    _count?: Prisma.NestedIntFilter<$PrismaModel>;
+    _min?: Prisma.NestedEnumCreditRoleFilter<$PrismaModel>;
+    _max?: Prisma.NestedEnumCreditRoleFilter<$PrismaModel>;
 };
 export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null;

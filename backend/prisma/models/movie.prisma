@@ -25,23 +25,16 @@ model Movie {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  genres    Genre[]   @relation("movie_genres")
-  countries Country[] @relation("movie_countries")
+  genres    Genre[]       @relation("movie_genres")
+  countries Country[]     @relation("movie_countries")
+  credits   MovieCredit[] @relation("movie_credits")
+  poster    MoviePoster?  @relation("movie_poster")
 
   // collections
-  // countries
-  // credits
   // reviews
-  // posters
   // backdrops
   // trailers
   // languages
 
   @@map("movies")
-}
-
-enum MovieStatus {
-  DRAFT
-  PUBLISHED
-  ARCHIVED
 }

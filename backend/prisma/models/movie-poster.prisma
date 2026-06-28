@@ -1,0 +1,14 @@
+model MoviePoster {
+  id      Int @id @default(autoincrement())
+  movieId Int @unique @map("movie_id")
+
+  url        String @db.VarChar(500)
+  storageKey String @unique @map("storage_key") @db.VarChar(500)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  movie Movie @relation("movie_poster", fields: [movieId], references: [id], onDelete: Cascade)
+
+  @@map("movie_posters")
+}

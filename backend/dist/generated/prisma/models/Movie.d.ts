@@ -255,6 +255,8 @@ export type MovieWhereInput = {
     updatedAt?: Prisma.DateTimeFilter<"Movie"> | Date | string;
     genres?: Prisma.GenreListRelationFilter;
     countries?: Prisma.CountryListRelationFilter;
+    credits?: Prisma.MovieCreditListRelationFilter;
+    poster?: Prisma.XOR<Prisma.MoviePosterNullableScalarRelationFilter, Prisma.MoviePosterWhereInput> | null;
 };
 export type MovieOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
@@ -278,6 +280,8 @@ export type MovieOrderByWithRelationInput = {
     updatedAt?: Prisma.SortOrder;
     genres?: Prisma.GenreOrderByRelationAggregateInput;
     countries?: Prisma.CountryOrderByRelationAggregateInput;
+    credits?: Prisma.MovieCreditOrderByRelationAggregateInput;
+    poster?: Prisma.MoviePosterOrderByWithRelationInput;
 };
 export type MovieWhereUniqueInput = Prisma.AtLeast<{
     id?: number;
@@ -304,6 +308,8 @@ export type MovieWhereUniqueInput = Prisma.AtLeast<{
     updatedAt?: Prisma.DateTimeFilter<"Movie"> | Date | string;
     genres?: Prisma.GenreListRelationFilter;
     countries?: Prisma.CountryListRelationFilter;
+    credits?: Prisma.MovieCreditListRelationFilter;
+    poster?: Prisma.XOR<Prisma.MoviePosterNullableScalarRelationFilter, Prisma.MoviePosterWhereInput> | null;
 }, "id" | "slug">;
 export type MovieOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
@@ -376,6 +382,8 @@ export type MovieCreateInput = {
     updatedAt?: Date | string;
     genres?: Prisma.GenreCreateNestedManyWithoutMoviesInput;
     countries?: Prisma.CountryCreateNestedManyWithoutMoviesInput;
+    credits?: Prisma.MovieCreditCreateNestedManyWithoutMovieInput;
+    poster?: Prisma.MoviePosterCreateNestedOneWithoutMovieInput;
 };
 export type MovieUncheckedCreateInput = {
     id?: number;
@@ -399,6 +407,8 @@ export type MovieUncheckedCreateInput = {
     updatedAt?: Date | string;
     genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMoviesInput;
     countries?: Prisma.CountryUncheckedCreateNestedManyWithoutMoviesInput;
+    credits?: Prisma.MovieCreditUncheckedCreateNestedManyWithoutMovieInput;
+    poster?: Prisma.MoviePosterUncheckedCreateNestedOneWithoutMovieInput;
 };
 export type MovieUpdateInput = {
     slug?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -421,6 +431,8 @@ export type MovieUpdateInput = {
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     genres?: Prisma.GenreUpdateManyWithoutMoviesNestedInput;
     countries?: Prisma.CountryUpdateManyWithoutMoviesNestedInput;
+    credits?: Prisma.MovieCreditUpdateManyWithoutMovieNestedInput;
+    poster?: Prisma.MoviePosterUpdateOneWithoutMovieNestedInput;
 };
 export type MovieUncheckedUpdateInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -444,6 +456,8 @@ export type MovieUncheckedUpdateInput = {
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     genres?: Prisma.GenreUncheckedUpdateManyWithoutMoviesNestedInput;
     countries?: Prisma.CountryUncheckedUpdateManyWithoutMoviesNestedInput;
+    credits?: Prisma.MovieCreditUncheckedUpdateManyWithoutMovieNestedInput;
+    poster?: Prisma.MoviePosterUncheckedUpdateOneWithoutMovieNestedInput;
 };
 export type MovieCreateManyInput = {
     id?: number;
@@ -514,6 +528,10 @@ export type MovieListRelationFilter = {
 };
 export type MovieOrderByRelationAggregateInput = {
     _count?: Prisma.SortOrder;
+};
+export type MovieScalarRelationFilter = {
+    is?: Prisma.MovieWhereInput;
+    isNot?: Prisma.MovieWhereInput;
 };
 export type MovieCountOrderByAggregateInput = {
     id?: Prisma.SortOrder;
@@ -664,6 +682,30 @@ export type MovieUncheckedUpdateManyWithoutGenresNestedInput = {
     updateMany?: Prisma.MovieUpdateManyWithWhereWithoutGenresInput | Prisma.MovieUpdateManyWithWhereWithoutGenresInput[];
     deleteMany?: Prisma.MovieScalarWhereInput | Prisma.MovieScalarWhereInput[];
 };
+export type MovieCreateNestedOneWithoutCreditsInput = {
+    create?: Prisma.XOR<Prisma.MovieCreateWithoutCreditsInput, Prisma.MovieUncheckedCreateWithoutCreditsInput>;
+    connectOrCreate?: Prisma.MovieCreateOrConnectWithoutCreditsInput;
+    connect?: Prisma.MovieWhereUniqueInput;
+};
+export type MovieUpdateOneRequiredWithoutCreditsNestedInput = {
+    create?: Prisma.XOR<Prisma.MovieCreateWithoutCreditsInput, Prisma.MovieUncheckedCreateWithoutCreditsInput>;
+    connectOrCreate?: Prisma.MovieCreateOrConnectWithoutCreditsInput;
+    upsert?: Prisma.MovieUpsertWithoutCreditsInput;
+    connect?: Prisma.MovieWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.MovieUpdateToOneWithWhereWithoutCreditsInput, Prisma.MovieUpdateWithoutCreditsInput>, Prisma.MovieUncheckedUpdateWithoutCreditsInput>;
+};
+export type MovieCreateNestedOneWithoutPosterInput = {
+    create?: Prisma.XOR<Prisma.MovieCreateWithoutPosterInput, Prisma.MovieUncheckedCreateWithoutPosterInput>;
+    connectOrCreate?: Prisma.MovieCreateOrConnectWithoutPosterInput;
+    connect?: Prisma.MovieWhereUniqueInput;
+};
+export type MovieUpdateOneRequiredWithoutPosterNestedInput = {
+    create?: Prisma.XOR<Prisma.MovieCreateWithoutPosterInput, Prisma.MovieUncheckedCreateWithoutPosterInput>;
+    connectOrCreate?: Prisma.MovieCreateOrConnectWithoutPosterInput;
+    upsert?: Prisma.MovieUpsertWithoutPosterInput;
+    connect?: Prisma.MovieWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.MovieUpdateToOneWithWhereWithoutPosterInput, Prisma.MovieUpdateWithoutPosterInput>, Prisma.MovieUncheckedUpdateWithoutPosterInput>;
+};
 export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null;
 };
@@ -707,6 +749,8 @@ export type MovieCreateWithoutCountriesInput = {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     genres?: Prisma.GenreCreateNestedManyWithoutMoviesInput;
+    credits?: Prisma.MovieCreditCreateNestedManyWithoutMovieInput;
+    poster?: Prisma.MoviePosterCreateNestedOneWithoutMovieInput;
 };
 export type MovieUncheckedCreateWithoutCountriesInput = {
     id?: number;
@@ -729,6 +773,8 @@ export type MovieUncheckedCreateWithoutCountriesInput = {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMoviesInput;
+    credits?: Prisma.MovieCreditUncheckedCreateNestedManyWithoutMovieInput;
+    poster?: Prisma.MoviePosterUncheckedCreateNestedOneWithoutMovieInput;
 };
 export type MovieCreateOrConnectWithoutCountriesInput = {
     where: Prisma.MovieWhereUniqueInput;
@@ -791,6 +837,8 @@ export type MovieCreateWithoutGenresInput = {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     countries?: Prisma.CountryCreateNestedManyWithoutMoviesInput;
+    credits?: Prisma.MovieCreditCreateNestedManyWithoutMovieInput;
+    poster?: Prisma.MoviePosterCreateNestedOneWithoutMovieInput;
 };
 export type MovieUncheckedCreateWithoutGenresInput = {
     id?: number;
@@ -813,6 +861,8 @@ export type MovieUncheckedCreateWithoutGenresInput = {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     countries?: Prisma.CountryUncheckedCreateNestedManyWithoutMoviesInput;
+    credits?: Prisma.MovieCreditUncheckedCreateNestedManyWithoutMovieInput;
+    poster?: Prisma.MoviePosterUncheckedCreateNestedOneWithoutMovieInput;
 };
 export type MovieCreateOrConnectWithoutGenresInput = {
     where: Prisma.MovieWhereUniqueInput;
@@ -830,6 +880,220 @@ export type MovieUpdateWithWhereUniqueWithoutGenresInput = {
 export type MovieUpdateManyWithWhereWithoutGenresInput = {
     where: Prisma.MovieScalarWhereInput;
     data: Prisma.XOR<Prisma.MovieUpdateManyMutationInput, Prisma.MovieUncheckedUpdateManyWithoutGenresInput>;
+};
+export type MovieCreateWithoutCreditsInput = {
+    slug: string;
+    title: string;
+    originalTitle?: string | null;
+    excerpt?: string | null;
+    description?: string | null;
+    releaseDate?: Date | string | null;
+    releaseYear?: number | null;
+    duration?: number | null;
+    ageRating: string;
+    status?: $Enums.MovieStatus;
+    ratingAverage?: runtime.Decimal | runtime.DecimalJsLike | number | string;
+    ratingCount?: number;
+    reviewCount?: number;
+    viewCount?: number;
+    isFeatured?: boolean;
+    publishedAt?: Date | string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    genres?: Prisma.GenreCreateNestedManyWithoutMoviesInput;
+    countries?: Prisma.CountryCreateNestedManyWithoutMoviesInput;
+    poster?: Prisma.MoviePosterCreateNestedOneWithoutMovieInput;
+};
+export type MovieUncheckedCreateWithoutCreditsInput = {
+    id?: number;
+    slug: string;
+    title: string;
+    originalTitle?: string | null;
+    excerpt?: string | null;
+    description?: string | null;
+    releaseDate?: Date | string | null;
+    releaseYear?: number | null;
+    duration?: number | null;
+    ageRating: string;
+    status?: $Enums.MovieStatus;
+    ratingAverage?: runtime.Decimal | runtime.DecimalJsLike | number | string;
+    ratingCount?: number;
+    reviewCount?: number;
+    viewCount?: number;
+    isFeatured?: boolean;
+    publishedAt?: Date | string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMoviesInput;
+    countries?: Prisma.CountryUncheckedCreateNestedManyWithoutMoviesInput;
+    poster?: Prisma.MoviePosterUncheckedCreateNestedOneWithoutMovieInput;
+};
+export type MovieCreateOrConnectWithoutCreditsInput = {
+    where: Prisma.MovieWhereUniqueInput;
+    create: Prisma.XOR<Prisma.MovieCreateWithoutCreditsInput, Prisma.MovieUncheckedCreateWithoutCreditsInput>;
+};
+export type MovieUpsertWithoutCreditsInput = {
+    update: Prisma.XOR<Prisma.MovieUpdateWithoutCreditsInput, Prisma.MovieUncheckedUpdateWithoutCreditsInput>;
+    create: Prisma.XOR<Prisma.MovieCreateWithoutCreditsInput, Prisma.MovieUncheckedCreateWithoutCreditsInput>;
+    where?: Prisma.MovieWhereInput;
+};
+export type MovieUpdateToOneWithWhereWithoutCreditsInput = {
+    where?: Prisma.MovieWhereInput;
+    data: Prisma.XOR<Prisma.MovieUpdateWithoutCreditsInput, Prisma.MovieUncheckedUpdateWithoutCreditsInput>;
+};
+export type MovieUpdateWithoutCreditsInput = {
+    slug?: Prisma.StringFieldUpdateOperationsInput | string;
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    originalTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    releaseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    ageRating?: Prisma.StringFieldUpdateOperationsInput | string;
+    status?: Prisma.EnumMovieStatusFieldUpdateOperationsInput | $Enums.MovieStatus;
+    ratingAverage?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    ratingCount?: Prisma.IntFieldUpdateOperationsInput | number;
+    reviewCount?: Prisma.IntFieldUpdateOperationsInput | number;
+    viewCount?: Prisma.IntFieldUpdateOperationsInput | number;
+    isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    genres?: Prisma.GenreUpdateManyWithoutMoviesNestedInput;
+    countries?: Prisma.CountryUpdateManyWithoutMoviesNestedInput;
+    poster?: Prisma.MoviePosterUpdateOneWithoutMovieNestedInput;
+};
+export type MovieUncheckedUpdateWithoutCreditsInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    slug?: Prisma.StringFieldUpdateOperationsInput | string;
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    originalTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    releaseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    ageRating?: Prisma.StringFieldUpdateOperationsInput | string;
+    status?: Prisma.EnumMovieStatusFieldUpdateOperationsInput | $Enums.MovieStatus;
+    ratingAverage?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    ratingCount?: Prisma.IntFieldUpdateOperationsInput | number;
+    reviewCount?: Prisma.IntFieldUpdateOperationsInput | number;
+    viewCount?: Prisma.IntFieldUpdateOperationsInput | number;
+    isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    genres?: Prisma.GenreUncheckedUpdateManyWithoutMoviesNestedInput;
+    countries?: Prisma.CountryUncheckedUpdateManyWithoutMoviesNestedInput;
+    poster?: Prisma.MoviePosterUncheckedUpdateOneWithoutMovieNestedInput;
+};
+export type MovieCreateWithoutPosterInput = {
+    slug: string;
+    title: string;
+    originalTitle?: string | null;
+    excerpt?: string | null;
+    description?: string | null;
+    releaseDate?: Date | string | null;
+    releaseYear?: number | null;
+    duration?: number | null;
+    ageRating: string;
+    status?: $Enums.MovieStatus;
+    ratingAverage?: runtime.Decimal | runtime.DecimalJsLike | number | string;
+    ratingCount?: number;
+    reviewCount?: number;
+    viewCount?: number;
+    isFeatured?: boolean;
+    publishedAt?: Date | string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    genres?: Prisma.GenreCreateNestedManyWithoutMoviesInput;
+    countries?: Prisma.CountryCreateNestedManyWithoutMoviesInput;
+    credits?: Prisma.MovieCreditCreateNestedManyWithoutMovieInput;
+};
+export type MovieUncheckedCreateWithoutPosterInput = {
+    id?: number;
+    slug: string;
+    title: string;
+    originalTitle?: string | null;
+    excerpt?: string | null;
+    description?: string | null;
+    releaseDate?: Date | string | null;
+    releaseYear?: number | null;
+    duration?: number | null;
+    ageRating: string;
+    status?: $Enums.MovieStatus;
+    ratingAverage?: runtime.Decimal | runtime.DecimalJsLike | number | string;
+    ratingCount?: number;
+    reviewCount?: number;
+    viewCount?: number;
+    isFeatured?: boolean;
+    publishedAt?: Date | string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    genres?: Prisma.GenreUncheckedCreateNestedManyWithoutMoviesInput;
+    countries?: Prisma.CountryUncheckedCreateNestedManyWithoutMoviesInput;
+    credits?: Prisma.MovieCreditUncheckedCreateNestedManyWithoutMovieInput;
+};
+export type MovieCreateOrConnectWithoutPosterInput = {
+    where: Prisma.MovieWhereUniqueInput;
+    create: Prisma.XOR<Prisma.MovieCreateWithoutPosterInput, Prisma.MovieUncheckedCreateWithoutPosterInput>;
+};
+export type MovieUpsertWithoutPosterInput = {
+    update: Prisma.XOR<Prisma.MovieUpdateWithoutPosterInput, Prisma.MovieUncheckedUpdateWithoutPosterInput>;
+    create: Prisma.XOR<Prisma.MovieCreateWithoutPosterInput, Prisma.MovieUncheckedCreateWithoutPosterInput>;
+    where?: Prisma.MovieWhereInput;
+};
+export type MovieUpdateToOneWithWhereWithoutPosterInput = {
+    where?: Prisma.MovieWhereInput;
+    data: Prisma.XOR<Prisma.MovieUpdateWithoutPosterInput, Prisma.MovieUncheckedUpdateWithoutPosterInput>;
+};
+export type MovieUpdateWithoutPosterInput = {
+    slug?: Prisma.StringFieldUpdateOperationsInput | string;
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    originalTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    releaseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    ageRating?: Prisma.StringFieldUpdateOperationsInput | string;
+    status?: Prisma.EnumMovieStatusFieldUpdateOperationsInput | $Enums.MovieStatus;
+    ratingAverage?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    ratingCount?: Prisma.IntFieldUpdateOperationsInput | number;
+    reviewCount?: Prisma.IntFieldUpdateOperationsInput | number;
+    viewCount?: Prisma.IntFieldUpdateOperationsInput | number;
+    isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    genres?: Prisma.GenreUpdateManyWithoutMoviesNestedInput;
+    countries?: Prisma.CountryUpdateManyWithoutMoviesNestedInput;
+    credits?: Prisma.MovieCreditUpdateManyWithoutMovieNestedInput;
+};
+export type MovieUncheckedUpdateWithoutPosterInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    slug?: Prisma.StringFieldUpdateOperationsInput | string;
+    title?: Prisma.StringFieldUpdateOperationsInput | string;
+    originalTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    excerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    releaseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    ageRating?: Prisma.StringFieldUpdateOperationsInput | string;
+    status?: Prisma.EnumMovieStatusFieldUpdateOperationsInput | $Enums.MovieStatus;
+    ratingAverage?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string;
+    ratingCount?: Prisma.IntFieldUpdateOperationsInput | number;
+    reviewCount?: Prisma.IntFieldUpdateOperationsInput | number;
+    viewCount?: Prisma.IntFieldUpdateOperationsInput | number;
+    isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    genres?: Prisma.GenreUncheckedUpdateManyWithoutMoviesNestedInput;
+    countries?: Prisma.CountryUncheckedUpdateManyWithoutMoviesNestedInput;
+    credits?: Prisma.MovieCreditUncheckedUpdateManyWithoutMovieNestedInput;
 };
 export type MovieUpdateWithoutCountriesInput = {
     slug?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -851,6 +1115,8 @@ export type MovieUpdateWithoutCountriesInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     genres?: Prisma.GenreUpdateManyWithoutMoviesNestedInput;
+    credits?: Prisma.MovieCreditUpdateManyWithoutMovieNestedInput;
+    poster?: Prisma.MoviePosterUpdateOneWithoutMovieNestedInput;
 };
 export type MovieUncheckedUpdateWithoutCountriesInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -873,6 +1139,8 @@ export type MovieUncheckedUpdateWithoutCountriesInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     genres?: Prisma.GenreUncheckedUpdateManyWithoutMoviesNestedInput;
+    credits?: Prisma.MovieCreditUncheckedUpdateManyWithoutMovieNestedInput;
+    poster?: Prisma.MoviePosterUncheckedUpdateOneWithoutMovieNestedInput;
 };
 export type MovieUncheckedUpdateManyWithoutCountriesInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -915,6 +1183,8 @@ export type MovieUpdateWithoutGenresInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     countries?: Prisma.CountryUpdateManyWithoutMoviesNestedInput;
+    credits?: Prisma.MovieCreditUpdateManyWithoutMovieNestedInput;
+    poster?: Prisma.MoviePosterUpdateOneWithoutMovieNestedInput;
 };
 export type MovieUncheckedUpdateWithoutGenresInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -937,6 +1207,8 @@ export type MovieUncheckedUpdateWithoutGenresInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     countries?: Prisma.CountryUncheckedUpdateManyWithoutMoviesNestedInput;
+    credits?: Prisma.MovieCreditUncheckedUpdateManyWithoutMovieNestedInput;
+    poster?: Prisma.MoviePosterUncheckedUpdateOneWithoutMovieNestedInput;
 };
 export type MovieUncheckedUpdateManyWithoutGenresInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -962,10 +1234,12 @@ export type MovieUncheckedUpdateManyWithoutGenresInput = {
 export type MovieCountOutputType = {
     genres: number;
     countries: number;
+    credits: number;
 };
 export type MovieCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     genres?: boolean | MovieCountOutputTypeCountGenresArgs;
     countries?: boolean | MovieCountOutputTypeCountCountriesArgs;
+    credits?: boolean | MovieCountOutputTypeCountCreditsArgs;
 };
 export type MovieCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     select?: Prisma.MovieCountOutputTypeSelect<ExtArgs> | null;
@@ -975,6 +1249,9 @@ export type MovieCountOutputTypeCountGenresArgs<ExtArgs extends runtime.Types.Ex
 };
 export type MovieCountOutputTypeCountCountriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     where?: Prisma.CountryWhereInput;
+};
+export type MovieCountOutputTypeCountCreditsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.MovieCreditWhereInput;
 };
 export type MovieSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
@@ -998,6 +1275,8 @@ export type MovieSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     updatedAt?: boolean;
     genres?: boolean | Prisma.Movie$genresArgs<ExtArgs>;
     countries?: boolean | Prisma.Movie$countriesArgs<ExtArgs>;
+    credits?: boolean | Prisma.Movie$creditsArgs<ExtArgs>;
+    poster?: boolean | Prisma.Movie$posterArgs<ExtArgs>;
     _count?: boolean | Prisma.MovieCountOutputTypeDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["movie"]>;
 export type MovieSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1067,6 +1346,8 @@ export type MovieOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type MovieInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     genres?: boolean | Prisma.Movie$genresArgs<ExtArgs>;
     countries?: boolean | Prisma.Movie$countriesArgs<ExtArgs>;
+    credits?: boolean | Prisma.Movie$creditsArgs<ExtArgs>;
+    poster?: boolean | Prisma.Movie$posterArgs<ExtArgs>;
     _count?: boolean | Prisma.MovieCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type MovieIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
@@ -1076,6 +1357,8 @@ export type $MoviePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     objects: {
         genres: Prisma.$GenrePayload<ExtArgs>[];
         countries: Prisma.$CountryPayload<ExtArgs>[];
+        credits: Prisma.$MovieCreditPayload<ExtArgs>[];
+        poster: Prisma.$MoviePosterPayload<ExtArgs> | null;
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: number;
@@ -1151,6 +1434,8 @@ export interface Prisma__MovieClient<T, Null = never, ExtArgs extends runtime.Ty
     readonly [Symbol.toStringTag]: "PrismaPromise";
     genres<T extends Prisma.Movie$genresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Movie$genresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     countries<T extends Prisma.Movie$countriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Movie$countriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CountryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    credits<T extends Prisma.Movie$creditsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Movie$creditsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MovieCreditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    poster<T extends Prisma.Movie$posterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Movie$posterArgs<ExtArgs>>): Prisma.Prisma__MoviePosterClient<runtime.Types.Result.GetResult<Prisma.$MoviePosterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
     catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): runtime.Types.Utils.JsPromise<T | TResult>;
     finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
@@ -1295,6 +1580,23 @@ export type Movie$countriesArgs<ExtArgs extends runtime.Types.Extensions.Interna
     take?: number;
     skip?: number;
     distinct?: Prisma.CountryScalarFieldEnum | Prisma.CountryScalarFieldEnum[];
+};
+export type Movie$creditsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    select?: Prisma.MovieCreditSelect<ExtArgs> | null;
+    omit?: Prisma.MovieCreditOmit<ExtArgs> | null;
+    include?: Prisma.MovieCreditInclude<ExtArgs> | null;
+    where?: Prisma.MovieCreditWhereInput;
+    orderBy?: Prisma.MovieCreditOrderByWithRelationInput | Prisma.MovieCreditOrderByWithRelationInput[];
+    cursor?: Prisma.MovieCreditWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.MovieCreditScalarFieldEnum | Prisma.MovieCreditScalarFieldEnum[];
+};
+export type Movie$posterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    select?: Prisma.MoviePosterSelect<ExtArgs> | null;
+    omit?: Prisma.MoviePosterOmit<ExtArgs> | null;
+    include?: Prisma.MoviePosterInclude<ExtArgs> | null;
+    where?: Prisma.MoviePosterWhereInput;
 };
 export type MovieDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     select?: Prisma.MovieSelect<ExtArgs> | null;

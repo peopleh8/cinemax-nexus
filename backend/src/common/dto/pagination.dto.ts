@@ -1,6 +1,5 @@
 import { Type } from 'class-transformer'
-import { IsEnum, IsInt, IsOptional, IsPositive, Max, Min } from 'class-validator'
-import { Sort } from '../enums'
+import { IsInt, IsOptional, IsPositive, Max, Min } from 'class-validator'
 
 export class PaginationDto {
   @IsOptional()
@@ -17,8 +16,4 @@ export class PaginationDto {
   @IsPositive()
   @Max(100)
   limit?: number = 20
-
-  @IsOptional()
-  @IsEnum(Sort)
-  sort?: Sort
 }

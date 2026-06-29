@@ -1,10 +1,11 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
+  FileTypeValidator,
   Get,
   Param,
+  ParseFilePipe,
   Post,
   Put,
   Query,
@@ -12,12 +13,11 @@ import {
   UseInterceptors,
 } from '@nestjs/common'
 import { MovieService } from './movie.service'
-import { CreateMovieDto } from './dto'
-import { PaginationDto } from 'src/common/dto'
-import { UpdateMovieDto } from './dto'
+import { CreateMovieDto, UpdateMovieDto } from './dto'
+import { PaginationDto, SearchDto, SortDto } from 'src/common/dto'
 import { FileInterceptor } from '@nestjs/platform-express'
-import { isSupportedImageMimeType, MAX_IMAGE_SIZE } from 'src/common/constants'
-import { ParseMultipartJsonInterceptor } from 'src/common/interceptors'
+import { MAX_IMAGE_SIZE } from 'src/common/constants'
+import { PaginationInterceptor, ParseMultipartJsonInterceptor } from 'src/common/interceptors'
 import type { UploadedFile as UploadedFileType } from 'src/common/types'
 
 @Controller('movies')
@@ -30,7 +30,8 @@ export class MovieController {
   }
 
   @Get()
-  findAll(@Query() query: PaginationDto) {
+  @UseInterceptors(PaginationInterceptor)
+  findAll(@Query() query: PaginationDto & SearchDto & SortDto) {
     return this.movieService.findAll(query)
   }
 
@@ -40,19 +41,23 @@ export class MovieController {
       limits: {
         fileSize: MAX_IMAGE_SIZE,
       },
-      fileFilter: (_request, file, callback) => {
-        if (!isSupportedImageMimeType(file.mimetype)) {
-          callback(new BadRequestException('Only JPG, PNG and WEBP poster images are supported'), false)
-
-          return
-        }
-
-        callback(null, true)
-      },
     }),
     new ParseMultipartJsonInterceptor('data'),
   )
-  create(@Body('data') dto: CreateMovieDto, @UploadedFile() poster?: UploadedFileType) {
+  create(
+    @Body('data') dto: CreateMovieDto,
+    @UploadedFile(
+      new ParseFilePipe({
+        fileIsRequired: false,
+        validators: [
+          new FileTypeValidator({
+            fileType: /^(image\/jpeg|image\/png|image\/webp)$/,
+          }),
+        ],
+      }),
+    )
+    poster?: UploadedFileType,
+  ) {
     return this.movieService.create(dto, poster)
   }
 
@@ -62,19 +67,24 @@ export class MovieController {
       limits: {
         fileSize: MAX_IMAGE_SIZE,
       },
-      fileFilter: (_request, file, callback) => {
-        if (!isSupportedImageMimeType(file.mimetype)) {
-          callback(new BadRequestException('Only JPG, PNG and WEBP poster images are supported'), false)
-
-          return
-        }
-
-        callback(null, true)
-      },
     }),
     new ParseMultipartJsonInterceptor('data'),
   )
-  update(@Param('slug') slug: string, @Body('data') dto: UpdateMovieDto, @UploadedFile() poster?: UploadedFileType) {
+  update(
+    @Param('slug') slug: string,
+    @Body('data') dto: UpdateMovieDto,
+    @UploadedFile(
+      new ParseFilePipe({
+        fileIsRequired: false,
+        validators: [
+          new FileTypeValidator({
+            fileType: /^(image\/jpeg|image\/png|image\/webp)$/,
+          }),
+        ],
+      }),
+    )
+    poster?: UploadedFileType,
+  ) {
     return this.movieService.update(slug, dto, poster)
   }
 

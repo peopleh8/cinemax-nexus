@@ -43,12 +43,7 @@ let PersonService = class PersonService {
         ]);
         return {
             rows: people,
-            meta: {
-                total,
-                page,
-                limit,
-                totalPages: Math.ceil(total / limit),
-            },
+            total,
         };
     }
     async create(dto) {

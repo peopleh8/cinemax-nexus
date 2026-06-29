@@ -3,8 +3,9 @@ import { ConfigService } from '@nestjs/config'
 import { randomUUID } from 'node:crypto'
 import { mkdir, unlink, writeFile } from 'node:fs/promises'
 import { isAbsolute, relative, resolve } from 'node:path'
-import { getImageExtension, MAX_IMAGE_SIZE, StorageFolder } from 'src/common/constants'
+import { MAX_IMAGE_SIZE, StorageFolder } from 'src/common/constants'
 import { StoredFile, UploadedFile } from 'src/common/types'
+import { getFileExtension } from 'src/common/utils'
 
 @Injectable()
 export class StorageService {
@@ -13,7 +14,7 @@ export class StorageService {
   constructor(private readonly configService: ConfigService) {}
 
   async uploadImage(file: UploadedFile, folder: StorageFolder): Promise<StoredFile> {
-    const extension = getImageExtension(file.mimetype)
+    const extension = getFileExtension(file.originalname)
 
     if (!extension) {
       throw new BadRequestException('Only JPG, PNG and WEBP images are supported')

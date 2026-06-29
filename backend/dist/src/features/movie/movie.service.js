@@ -40,33 +40,28 @@ let MovieService = class MovieService {
         return movie;
     }
     async findAll(dto, isForAdmin = false) {
-        const { page = 1, limit = 20, sort = enums_1.Sort.DESC } = dto;
+        const { page = 1, limit = 20, sort = enums_1.Sort.DESC, search } = dto;
         const skip = (page - 1) * limit;
+        const where = {
+            ...(isForAdmin ? {} : { status: client_1.MovieStatus.PUBLISHED }),
+            ...(search ? { title: { contains: search, mode: 'insensitive' } } : {}),
+        };
         const [movies, total] = await this.prismaService.$transaction([
             this.prismaService.movie.findMany({
                 skip,
                 take: limit,
-                where: {
-                    ...(isForAdmin ? {} : { status: client_1.MovieStatus.PUBLISHED }),
-                },
+                where,
                 orderBy: {
                     createdAt: sort,
                 },
             }),
             this.prismaService.movie.count({
-                where: {
-                    ...(isForAdmin ? {} : { status: client_1.MovieStatus.PUBLISHED }),
-                },
+                where,
             }),
         ]);
         return {
             rows: movies,
-            meta: {
-                page,
-                limit,
-                total,
-                totalPages: Math.ceil(total / limit),
-            },
+            total,
         };
     }
     async create(dto, poster) {

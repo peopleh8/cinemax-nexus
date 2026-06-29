@@ -43,12 +43,7 @@ let GenreService = class GenreService {
         ]);
         return {
             rows: genres,
-            meta: {
-                page,
-                limit,
-                total,
-                totalPage: Math.ceil(total / limit),
-            },
+            total,
         };
     }
     async create(dto) {

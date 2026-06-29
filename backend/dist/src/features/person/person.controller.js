@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PersonController = void 0;
 const common_1 = require("@nestjs/common");
 const person_service_1 = require("./person.service");
-const dto_1 = require("../../common/dto");
+const dto_1 = require("./dto");
 const dto_2 = require("./dto");
-const dto_3 = require("./dto");
+const interceptors_1 = require("../../common/interceptors");
 let PersonController = class PersonController {
     personService;
     constructor(personService) {
@@ -49,16 +49,17 @@ __decorate([
 ], PersonController.prototype, "findOneBySlug", null);
 __decorate([
     (0, common_1.Get)(),
+    (0, common_1.UseInterceptors)(interceptors_1.PaginationInterceptor),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [dto_1.PaginationDto]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], PersonController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [dto_2.CreatePersonDto]),
+    __metadata("design:paramtypes", [dto_1.CreatePersonDto]),
     __metadata("design:returntype", void 0)
 ], PersonController.prototype, "create", null);
 __decorate([
@@ -66,7 +67,7 @@ __decorate([
     __param(0, (0, common_1.Param)('slug')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, dto_3.UpdatePersonDto]),
+    __metadata("design:paramtypes", [String, dto_2.UpdatePersonDto]),
     __metadata("design:returntype", void 0)
 ], PersonController.prototype, "update", null);
 __decorate([

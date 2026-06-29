@@ -1,14 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/infra/prisma/prisma.service'
-import { CreateMovieDto } from './dto'
+import { CreateMovieDto, UpdateMovieDto } from './dto'
 import { Movie, MovieStatus } from 'generated/prisma/client'
-import { PaginationDto } from 'src/common/dto'
+import { PaginationDto, SearchDto, SortDto } from 'src/common/dto'
 import { Sort } from 'src/common/enums'
-import { UpdateMovieDto } from './dto'
 import { generateUniqueSlug } from 'src/common/utils'
 import type { StoredFile, UploadedFile } from 'src/common/types'
 import { StorageService } from 'src/infra/storage/storage.service'
 import { StorageFolder } from 'src/common/constants'
+import { MovieWhereInput } from 'generated/prisma/models'
 
 @Injectable()
 export class MovieService {
@@ -35,36 +35,32 @@ export class MovieService {
     return movie
   }
 
-  async findAll(dto: PaginationDto, isForAdmin = false) {
-    const { page = 1, limit = 20, sort = Sort.DESC } = dto
+  async findAll(dto: PaginationDto & SearchDto & SortDto, isForAdmin = false) {
+    const { page = 1, limit = 20, sort = Sort.DESC, search } = dto
     const skip = (page - 1) * limit
+
+    const where = {
+      ...(isForAdmin ? {} : { status: MovieStatus.PUBLISHED }),
+      ...(search ? { title: { contains: search, mode: 'insensitive' } } : {}),
+    } as MovieWhereInput
 
     const [movies, total] = await this.prismaService.$transaction([
       this.prismaService.movie.findMany({
         skip,
         take: limit,
-        where: {
-          ...(isForAdmin ? {} : { status: MovieStatus.PUBLISHED }),
-        },
+        where,
         orderBy: {
           createdAt: sort,
         },
       }),
       this.prismaService.movie.count({
-        where: {
-          ...(isForAdmin ? {} : { status: MovieStatus.PUBLISHED }),
-        },
+        where,
       }),
     ])
 
     return {
       rows: movies,
-      meta: {
-        page,
-        limit,
-        total,
-        totalPages: Math.ceil(total / limit),
-      },
+      total,
     }
   }
 

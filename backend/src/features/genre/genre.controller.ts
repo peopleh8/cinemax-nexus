@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseInterceptors } from '@nestjs/common'
 import { GenreService } from './genre.service'
-import { PaginationDto } from 'src/common/dto'
+import { PaginationDto, SearchDto, SortDto } from 'src/common/dto'
 import { CreateGenreDto } from './dto'
 import { UpdateGenreDto } from './dto'
+import { PaginationInterceptor } from 'src/common/interceptors'
 
 @Controller('genres')
 export class GenreController {
@@ -14,7 +15,8 @@ export class GenreController {
   }
 
   @Get()
-  findAll(@Query() query: PaginationDto) {
+  @UseInterceptors(PaginationInterceptor)
+  findAll(@Query() query: PaginationDto & SearchDto & SortDto) {
     return this.genreService.findAll(query)
   }
 

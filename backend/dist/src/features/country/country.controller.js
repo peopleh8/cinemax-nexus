@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CountryController = void 0;
 const common_1 = require("@nestjs/common");
 const country_service_1 = require("./country.service");
-const dto_1 = require("../../common/dto");
+const dto_1 = require("./dto");
 const dto_2 = require("./dto");
-const dto_3 = require("./dto");
+const interceptors_1 = require("../../common/interceptors");
 let CountryController = class CountryController {
     countryService;
     constructor(countryService) {
@@ -49,16 +49,17 @@ __decorate([
 ], CountryController.prototype, "findOneBySlug", null);
 __decorate([
     (0, common_1.Get)(),
+    (0, common_1.UseInterceptors)(interceptors_1.PaginationInterceptor),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [dto_1.PaginationDto]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], CountryController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [dto_2.CreateCountryDto]),
+    __metadata("design:paramtypes", [dto_1.CreateCountryDto]),
     __metadata("design:returntype", void 0)
 ], CountryController.prototype, "create", null);
 __decorate([
@@ -66,7 +67,7 @@ __decorate([
     __param(0, (0, common_1.Param)('slug')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, dto_3.UpdateCountryDto]),
+    __metadata("design:paramtypes", [String, dto_2.UpdateCountryDto]),
     __metadata("design:returntype", void 0)
 ], CountryController.prototype, "update", null);
 __decorate([

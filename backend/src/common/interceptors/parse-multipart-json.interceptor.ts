@@ -1,4 +1,5 @@
 import { BadRequestException, CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common'
+import { Request } from 'express'
 import type { Observable } from 'rxjs'
 
 @Injectable()
@@ -8,7 +9,7 @@ export class ParseMultipartJsonInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     const request = context.switchToHttp().getRequest<{
       body?: Record<string, unknown>
-    }>()
+    }>() as Request
 
     const value = request.body?.[this.fieldName]
 

@@ -1,27 +1,21 @@
 import { Genre } from "../../../generated/prisma/client";
-import { PaginationDto } from "../../common/dto";
+import { PaginationDto, SearchDto, SortDto } from "../../common/dto";
 import { PrismaService } from "../../infra/prisma/prisma.service";
-import { CreateGenreDto } from './dto';
-import { UpdateGenreDto } from './dto';
+import { CreateGenreDto, UpdateGenreDto } from './dto';
 export declare class GenreService {
     private readonly prismaService;
     constructor(prismaService: PrismaService);
     findOneBySlug(slug: string): Promise<Genre>;
-    findAll(dto: PaginationDto): Promise<{
+    findAll(dto: PaginationDto & SearchDto & SortDto): Promise<{
         rows: {
-            description: string | null;
             id: number;
             slug: string;
+            description: string | null;
             createdAt: Date;
             updatedAt: Date;
             name: string;
         }[];
-        meta: {
-            page: number;
-            limit: number;
-            total: number;
-            totalPage: number;
-        };
+        total: number;
     }>;
     create(dto: CreateGenreDto): Promise<Genre>;
     update(slug: string, dto: UpdateGenreDto): Promise<Genre>;

@@ -1,11 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { Person } from 'generated/prisma/client'
-import { PaginationDto } from 'src/common/dto'
+import { PaginationDto, SearchDto, SortDto } from 'src/common/dto'
 import { Sort } from 'src/common/enums'
 import { PrismaService } from 'src/infra/prisma/prisma.service'
-import { CreatePersonDto } from './dto'
+import { CreatePersonDto, UpdatePersonDto } from './dto'
 import { generateUniqueSlug } from 'src/common/utils'
-import { UpdatePersonDto } from './dto'
 
 @Injectable()
 export class PersonService {
@@ -23,7 +22,7 @@ export class PersonService {
     return person
   }
 
-  async findAll(dto: PaginationDto) {
+  async findAll(dto: PaginationDto & SearchDto & SortDto) {
     const { page = 1, limit = 20, sort = Sort.DESC } = dto
     const skip = (page - 1) * limit
 
@@ -40,12 +39,7 @@ export class PersonService {
 
     return {
       rows: people,
-      meta: {
-        total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
-      },
+      total,
     }
   }
 

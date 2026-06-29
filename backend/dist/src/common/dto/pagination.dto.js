@@ -12,11 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PaginationDto = void 0;
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
-const enums_1 = require("../enums");
 class PaginationDto {
     page = 1;
     limit = 20;
-    sort;
 }
 exports.PaginationDto = PaginationDto;
 __decorate([
@@ -36,9 +34,4 @@ __decorate([
     (0, class_validator_1.Max)(100),
     __metadata("design:type", Number)
 ], PaginationDto.prototype, "limit", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(enums_1.Sort),
-    __metadata("design:type", String)
-], PaginationDto.prototype, "sort", void 0);
 //# sourceMappingURL=pagination.dto.js.map

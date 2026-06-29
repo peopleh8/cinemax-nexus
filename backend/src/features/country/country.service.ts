@@ -1,11 +1,10 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { Country } from 'generated/prisma/client'
-import { PaginationDto } from 'src/common/dto'
+import { PaginationDto, SearchDto, SortDto } from 'src/common/dto'
 import { Sort } from 'src/common/enums'
 import { generateUniqueSlug, getCountryCode } from 'src/common/utils'
 import { PrismaService } from 'src/infra/prisma/prisma.service'
-import { CreateCountryDto } from './dto'
-import { UpdateCountryDto } from './dto'
+import { CreateCountryDto, UpdateCountryDto } from './dto'
 
 @Injectable()
 export class CountryService {
@@ -23,7 +22,7 @@ export class CountryService {
     return country
   }
 
-  async findAll(dto: PaginationDto) {
+  async findAll(dto: PaginationDto & SearchDto & SortDto) {
     const { page = 1, limit = 20, sort = Sort.DESC } = dto
     const skip = (page - 1) * limit
 
@@ -40,12 +39,7 @@ export class CountryService {
 
     return {
       rows: countries,
-      meta: {
-        total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
-      },
+      total,
     }
   }
 

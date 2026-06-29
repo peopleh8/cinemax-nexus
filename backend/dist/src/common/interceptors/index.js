@@ -15,4 +15,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./parse-multipart-json.interceptor"), exports);
+__exportStar(require("./pagination.interceptor"), exports);
 //# sourceMappingURL=index.js.map

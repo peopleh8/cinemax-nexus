@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseInterceptors } from '@nestjs/common'
 import { CountryService } from './country.service'
-import { PaginationDto } from 'src/common/dto'
+import { PaginationDto, SearchDto, SortDto } from 'src/common/dto'
 import { CreateCountryDto } from './dto'
 import { UpdateCountryDto } from './dto'
+import { PaginationInterceptor } from 'src/common/interceptors'
 
 @Controller('countries')
 export class CountryController {
@@ -14,7 +15,8 @@ export class CountryController {
   }
 
   @Get()
-  findAll(@Query() dto: PaginationDto) {
+  @UseInterceptors(PaginationInterceptor)
+  findAll(@Query() dto: PaginationDto & SearchDto & SortDto) {
     return this.countryService.findAll(dto)
   }
 

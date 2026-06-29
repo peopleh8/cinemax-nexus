@@ -1,5 +1,5 @@
 import { PersonService } from './person.service';
-import { PaginationDto } from "../../common/dto";
+import { PaginationDto, SearchDto, SortDto } from "../../common/dto";
 import { CreatePersonDto } from './dto';
 import { UpdatePersonDto } from './dto';
 export declare class PersonController {
@@ -14,7 +14,7 @@ export declare class PersonController {
         bio: string | null;
         birthDate: Date | null;
     }>;
-    findAll(query: PaginationDto): Promise<{
+    findAll(query: PaginationDto & SearchDto & SortDto): Promise<{
         rows: {
             id: number;
             slug: string;
@@ -24,12 +24,7 @@ export declare class PersonController {
             bio: string | null;
             birthDate: Date | null;
         }[];
-        meta: {
-            total: number;
-            page: number;
-            limit: number;
-            totalPages: number;
-        };
+        total: number;
     }>;
     create(dto: CreatePersonDto): Promise<{
         id: number;

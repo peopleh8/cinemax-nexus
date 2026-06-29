@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseInterceptors } from '@nestjs/common'
 import { PersonService } from './person.service'
-import { PaginationDto } from 'src/common/dto'
+import { PaginationDto, SearchDto, SortDto } from 'src/common/dto'
 import { CreatePersonDto } from './dto'
 import { UpdatePersonDto } from './dto'
+import { PaginationInterceptor } from 'src/common/interceptors'
 
 @Controller('people')
 export class PersonController {
@@ -14,7 +15,8 @@ export class PersonController {
   }
 
   @Get()
-  findAll(@Query() query: PaginationDto) {
+  @UseInterceptors(PaginationInterceptor)
+  findAll(@Query() query: PaginationDto & SearchDto & SortDto) {
     return this.personService.findAll(query)
   }
 

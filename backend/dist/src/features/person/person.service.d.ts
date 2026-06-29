@@ -1,13 +1,12 @@
 import { Person } from "../../../generated/prisma/client";
-import { PaginationDto } from "../../common/dto";
+import { PaginationDto, SearchDto, SortDto } from "../../common/dto";
 import { PrismaService } from "../../infra/prisma/prisma.service";
-import { CreatePersonDto } from './dto';
-import { UpdatePersonDto } from './dto';
+import { CreatePersonDto, UpdatePersonDto } from './dto';
 export declare class PersonService {
     private readonly prismaService;
     constructor(prismaService: PrismaService);
     findOneBySlug(slug: string): Promise<Person>;
-    findAll(dto: PaginationDto): Promise<{
+    findAll(dto: PaginationDto & SearchDto & SortDto): Promise<{
         rows: {
             id: number;
             slug: string;
@@ -17,12 +16,7 @@ export declare class PersonService {
             bio: string | null;
             birthDate: Date | null;
         }[];
-        meta: {
-            total: number;
-            page: number;
-            limit: number;
-            totalPages: number;
-        };
+        total: number;
     }>;
     create(dto: CreatePersonDto): Promise<Person>;
     update(slug: string, dto: UpdatePersonDto): Promise<Person>;

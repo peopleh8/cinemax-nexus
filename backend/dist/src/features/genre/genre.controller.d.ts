@@ -1,54 +1,49 @@
 import { GenreService } from './genre.service';
-import { PaginationDto } from "../../common/dto";
+import { PaginationDto, SearchDto, SortDto } from "../../common/dto";
 import { CreateGenreDto } from './dto';
 import { UpdateGenreDto } from './dto';
 export declare class GenreController {
     private readonly genreService;
     constructor(genreService: GenreService);
     findOneBySlug(slug: string): Promise<{
-        description: string | null;
         id: number;
         slug: string;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
         name: string;
     }>;
-    findAll(query: PaginationDto): Promise<{
+    findAll(query: PaginationDto & SearchDto & SortDto): Promise<{
         rows: {
-            description: string | null;
             id: number;
             slug: string;
+            description: string | null;
             createdAt: Date;
             updatedAt: Date;
             name: string;
         }[];
-        meta: {
-            page: number;
-            limit: number;
-            total: number;
-            totalPage: number;
-        };
+        total: number;
     }>;
     create(dto: CreateGenreDto): Promise<{
-        description: string | null;
         id: number;
         slug: string;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
         name: string;
     }>;
     update(slug: string, dto: UpdateGenreDto): Promise<{
-        description: string | null;
         id: number;
         slug: string;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
         name: string;
     }>;
     delete(slug: string): Promise<{
-        description: string | null;
         id: number;
         slug: string;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
         name: string;

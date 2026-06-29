@@ -1,10 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { Genre } from 'generated/prisma/client'
-import { PaginationDto } from 'src/common/dto'
+import { PaginationDto, SearchDto, SortDto } from 'src/common/dto'
 import { Sort } from 'src/common/enums'
 import { PrismaService } from 'src/infra/prisma/prisma.service'
-import { CreateGenreDto } from './dto'
-import { UpdateGenreDto } from './dto'
+import { CreateGenreDto, UpdateGenreDto } from './dto'
 import { generateUniqueSlug } from 'src/common/utils'
 
 @Injectable()
@@ -23,7 +22,7 @@ export class GenreService {
     return genre
   }
 
-  async findAll(dto: PaginationDto) {
+  async findAll(dto: PaginationDto & SearchDto & SortDto) {
     const { page = 1, limit = 20, sort = Sort.DESC } = dto
     const skip = (page - 1) * limit
 
@@ -40,12 +39,7 @@ export class GenreService {
 
     return {
       rows: genres,
-      meta: {
-        page,
-        limit,
-        total,
-        totalPage: Math.ceil(total / limit),
-      },
+      total,
     }
   }
 

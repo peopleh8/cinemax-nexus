@@ -43,12 +43,7 @@ let CountryService = class CountryService {
         ]);
         return {
             rows: countries,
-            meta: {
-                total,
-                page,
-                limit,
-                totalPages: Math.ceil(total / limit),
-            },
+            total,
         };
     }
     async create(dto) {

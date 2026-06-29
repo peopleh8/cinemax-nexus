@@ -16,6 +16,7 @@ const node_crypto_1 = require("node:crypto");
 const promises_1 = require("node:fs/promises");
 const node_path_1 = require("node:path");
 const constants_1 = require("../../common/constants");
+const utils_1 = require("../../common/utils");
 let StorageService = class StorageService {
     configService;
     uploadsDirectory = (0, node_path_1.resolve)(process.cwd(), 'uploads');
@@ -23,7 +24,7 @@ let StorageService = class StorageService {
         this.configService = configService;
     }
     async uploadImage(file, folder) {
-        const extension = (0, constants_1.getImageExtension)(file.mimetype);
+        const extension = (0, utils_1.getFileExtension)(file.originalname);
         if (!extension) {
             throw new common_1.BadRequestException('Only JPG, PNG and WEBP images are supported');
         }

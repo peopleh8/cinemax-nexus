@@ -7,39 +7,41 @@ export declare class MovieController {
     constructor(movieService: MovieService);
     findOneBySlug(slug: string): Promise<{
         genres: {
+            name: string;
             id: number;
+            createdAt: Date;
+            updatedAt: Date;
             slug: string;
             description: string | null;
-            createdAt: Date;
-            updatedAt: Date;
-            name: string;
         }[];
         countries: {
+            name: string;
             id: number;
-            slug: string;
             createdAt: Date;
             updatedAt: Date;
-            name: string;
             code: string;
+            slug: string;
         }[];
         credits: {
             id: number;
+            role: import("../../../generated/prisma/enums").CreditRole;
             createdAt: Date;
             updatedAt: Date;
-            movieId: number;
             personId: number;
-            role: import("../../../generated/prisma/enums").CreditRole;
+            movieId: number;
         }[];
         poster: {
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            movieId: number;
-            url: string;
             storageKey: string;
+            url: string;
+            movieId: number;
         } | null;
     } & {
         id: number;
+        createdAt: Date;
+        updatedAt: Date;
         slug: string;
         title: string;
         originalTitle: string | null;
@@ -56,12 +58,12 @@ export declare class MovieController {
         viewCount: number;
         isFeatured: boolean;
         publishedAt: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
     findAll(query: PaginationDto & SearchDto & SortDto): Promise<{
         rows: {
             id: number;
+            createdAt: Date;
+            updatedAt: Date;
             slug: string;
             title: string;
             originalTitle: string | null;
@@ -78,13 +80,13 @@ export declare class MovieController {
             viewCount: number;
             isFeatured: boolean;
             publishedAt: Date | null;
-            createdAt: Date;
-            updatedAt: Date;
         }[];
         total: number;
     }>;
     create(dto: CreateMovieDto, poster?: UploadedFileType): Promise<{
         id: number;
+        createdAt: Date;
+        updatedAt: Date;
         slug: string;
         title: string;
         originalTitle: string | null;
@@ -101,11 +103,11 @@ export declare class MovieController {
         viewCount: number;
         isFeatured: boolean;
         publishedAt: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
     update(slug: string, dto: UpdateMovieDto, poster?: UploadedFileType): Promise<{
         id: number;
+        createdAt: Date;
+        updatedAt: Date;
         slug: string;
         title: string;
         originalTitle: string | null;
@@ -122,11 +124,11 @@ export declare class MovieController {
         viewCount: number;
         isFeatured: boolean;
         publishedAt: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
     delete(slug: string): Promise<{
         id: number;
+        createdAt: Date;
+        updatedAt: Date;
         slug: string;
         title: string;
         originalTitle: string | null;
@@ -143,7 +145,5 @@ export declare class MovieController {
         viewCount: number;
         isFeatured: boolean;
         publishedAt: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
 }

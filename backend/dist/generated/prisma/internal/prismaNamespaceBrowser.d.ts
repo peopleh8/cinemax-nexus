@@ -17,6 +17,8 @@ export declare const ModelName: {
     readonly MoviePoster: "MoviePoster";
     readonly Movie: "Movie";
     readonly Person: "Person";
+    readonly Session: "Session";
+    readonly User: "User";
 };
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 export declare const TransactionIsolationLevel: {
@@ -94,6 +96,24 @@ export declare const PersonScalarFieldEnum: {
     readonly updatedAt: "updatedAt";
 };
 export type PersonScalarFieldEnum = (typeof PersonScalarFieldEnum)[keyof typeof PersonScalarFieldEnum];
+export declare const SessionScalarFieldEnum: {
+    readonly id: "id";
+    readonly tokenHash: "tokenHash";
+    readonly expiresAt: "expiresAt";
+    readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
+    readonly userId: "userId";
+};
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum];
+export declare const UserScalarFieldEnum: {
+    readonly id: "id";
+    readonly email: "email";
+    readonly password: "password";
+    readonly role: "role";
+    readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
+};
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
 export declare const SortOrder: {
     readonly asc: "asc";
     readonly desc: "desc";

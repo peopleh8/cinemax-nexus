@@ -11,5 +11,7 @@ model Person {
 
   credits MovieCredit[] @relation("person_credits")
 
+  @@index([id])
+  @@index([slug])
   @@map("people")
 }

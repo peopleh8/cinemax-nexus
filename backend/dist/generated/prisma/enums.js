@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MovieStatus = exports.CreditRole = void 0;
+exports.UserRole = exports.MovieStatus = exports.CreditRole = void 0;
 exports.CreditRole = {
     ACTOR: 'ACTOR',
     DIRECTOR: 'DIRECTOR',
@@ -15,5 +15,10 @@ exports.MovieStatus = {
     DRAFT: 'DRAFT',
     PUBLISHED: 'PUBLISHED',
     ARCHIVED: 'ARCHIVED'
+};
+exports.UserRole = {
+    USER: 'USER',
+    EDITOR: 'EDITOR',
+    ADMIN: 'ADMIN'
 };
 //# sourceMappingURL=enums.js.map

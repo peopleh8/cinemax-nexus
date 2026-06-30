@@ -12,12 +12,13 @@ const movie_module_1 = require("./movie/movie.module");
 const genre_module_1 = require("./genre/genre.module");
 const country_module_1 = require("./country/country.module");
 const person_module_1 = require("./person/person.module");
+const auth_module_1 = require("./auth/auth.module");
 let FeaturesModule = class FeaturesModule {
 };
 exports.FeaturesModule = FeaturesModule;
 exports.FeaturesModule = FeaturesModule = __decorate([
     (0, common_1.Module)({
-        imports: [movie_module_1.MovieModule, genre_module_1.GenreModule, country_module_1.CountryModule, person_module_1.PersonModule],
+        imports: [movie_module_1.MovieModule, genre_module_1.GenreModule, country_module_1.CountryModule, person_module_1.PersonModule, auth_module_1.AuthModule],
         controllers: [],
         providers: [],
     })

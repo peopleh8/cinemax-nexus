@@ -10,5 +10,7 @@ model Country {
 
   movies Movie[] @relation("movie_countries")
 
+  @@index([id])
+  @@index([slug])
   @@map("countries")
 }

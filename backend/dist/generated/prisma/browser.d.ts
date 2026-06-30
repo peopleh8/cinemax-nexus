@@ -8,3 +8,5 @@ export type MovieCredit = Prisma.MovieCreditModel;
 export type MoviePoster = Prisma.MoviePosterModel;
 export type Movie = Prisma.MovieModel;
 export type Person = Prisma.PersonModel;
+export type Session = Prisma.SessionModel;
+export type User = Prisma.UserModel;

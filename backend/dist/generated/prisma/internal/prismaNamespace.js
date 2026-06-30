@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.PersonScalarFieldEnum = exports.MovieScalarFieldEnum = exports.MoviePosterScalarFieldEnum = exports.MovieCreditScalarFieldEnum = exports.GenreScalarFieldEnum = exports.CountryScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.UserScalarFieldEnum = exports.SessionScalarFieldEnum = exports.PersonScalarFieldEnum = exports.MovieScalarFieldEnum = exports.MoviePosterScalarFieldEnum = exports.MovieCreditScalarFieldEnum = exports.GenreScalarFieldEnum = exports.CountryScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 exports.PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError;
 exports.PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError;
@@ -65,7 +65,9 @@ exports.ModelName = {
     MovieCredit: 'MovieCredit',
     MoviePoster: 'MoviePoster',
     Movie: 'Movie',
-    Person: 'Person'
+    Person: 'Person',
+    Session: 'Session',
+    User: 'User'
 };
 exports.TransactionIsolationLevel = runtime.makeStrictEnum({
     ReadUncommitted: 'ReadUncommitted',
@@ -132,6 +134,22 @@ exports.PersonScalarFieldEnum = {
     name: 'name',
     bio: 'bio',
     birthDate: 'birthDate',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.SessionScalarFieldEnum = {
+    id: 'id',
+    tokenHash: 'tokenHash',
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId'
+};
+exports.UserScalarFieldEnum = {
+    id: 'id',
+    email: 'email',
+    password: 'password',
+    role: 'role',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };

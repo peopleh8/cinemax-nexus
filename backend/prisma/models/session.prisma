@@ -1,0 +1,15 @@
+model Session {
+  id Int @id @default(autoincrement())
+
+  tokenHash String   @unique @map("token_hash")
+  expiresAt DateTime @map("expires_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  userId Int  @map("user_id")
+  user   User @relation("user_sessions", fields: [userId], references: [id])
+
+  @@index([id])
+  @@map("sessions")
+}

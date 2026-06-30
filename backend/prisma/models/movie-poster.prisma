@@ -10,5 +10,6 @@ model MoviePoster {
 
   movie Movie @relation("movie_poster", fields: [movieId], references: [id], onDelete: Cascade)
 
+  @@index([id])
   @@map("movie_posters")
 }

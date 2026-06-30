@@ -12,5 +12,6 @@ model MovieCredit {
   person Person @relation("person_credits", fields: [personId], references: [id], onDelete: Cascade)
   movie  Movie  @relation("movie_credits", fields: [movieId], references: [id], onDelete: Cascade)
 
+  @@index([id])
   @@map("movie_credit")
 }

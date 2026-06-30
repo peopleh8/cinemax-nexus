@@ -15,3 +15,9 @@ export declare const MovieStatus: {
     readonly ARCHIVED: "ARCHIVED";
 };
 export type MovieStatus = (typeof MovieStatus)[keyof typeof MovieStatus];
+export declare const UserRole: {
+    readonly USER: "USER";
+    readonly EDITOR: "EDITOR";
+    readonly ADMIN: "ADMIN";
+};
+export type UserRole = (typeof UserRole)[keyof typeof UserRole];

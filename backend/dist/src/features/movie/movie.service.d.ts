@@ -10,39 +10,41 @@ export declare class MovieService {
     constructor(prismaService: PrismaService, storageService: StorageService);
     findOneBySlug(slug: string, isForAdmin?: boolean): Promise<{
         genres: {
+            name: string;
             id: number;
+            createdAt: Date;
+            updatedAt: Date;
             slug: string;
             description: string | null;
-            createdAt: Date;
-            updatedAt: Date;
-            name: string;
         }[];
         countries: {
-            code: string;
+            name: string;
             id: number;
-            slug: string;
             createdAt: Date;
             updatedAt: Date;
-            name: string;
+            code: string;
+            slug: string;
         }[];
         credits: {
             id: number;
+            role: import("generated/prisma/client").CreditRole;
             createdAt: Date;
             updatedAt: Date;
-            role: import("generated/prisma/client").CreditRole;
             personId: number;
             movieId: number;
         }[];
         poster: {
-            storageKey: string;
-            url: string;
             id: number;
             createdAt: Date;
             updatedAt: Date;
+            storageKey: string;
+            url: string;
             movieId: number;
         } | null;
     } & {
         id: number;
+        createdAt: Date;
+        updatedAt: Date;
         slug: string;
         title: string;
         originalTitle: string | null;
@@ -59,12 +61,12 @@ export declare class MovieService {
         viewCount: number;
         isFeatured: boolean;
         publishedAt: Date | null;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
     findAll(dto: PaginationDto & SearchDto & SortDto, isForAdmin?: boolean): Promise<{
         rows: {
             id: number;
+            createdAt: Date;
+            updatedAt: Date;
             slug: string;
             title: string;
             originalTitle: string | null;
@@ -81,8 +83,6 @@ export declare class MovieService {
             viewCount: number;
             isFeatured: boolean;
             publishedAt: Date | null;
-            createdAt: Date;
-            updatedAt: Date;
         }[];
         total: number;
     }>;

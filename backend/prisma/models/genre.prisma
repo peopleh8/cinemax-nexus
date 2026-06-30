@@ -5,10 +5,12 @@ model Genre {
   name        String  @db.VarChar(255)
   description String? @db.Text
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   movies Movie[] @relation("movie_genres")
 
+  @@index([id])
+  @@index([slug])
   @@map("genres")
 }

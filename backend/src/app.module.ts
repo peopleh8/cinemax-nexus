@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
 import { ConfigModule } from '@nestjs/config'
 import { InfraModule } from './infra/infra.module'
 import { FeaturesModule } from './features/features.module'
@@ -13,7 +11,5 @@ import { FeaturesModule } from './features/features.module'
     InfraModule,
     FeaturesModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

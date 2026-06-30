@@ -8,9 +8,9 @@ export declare class GenreService {
     findOneBySlug(slug: string): Promise<Genre>;
     findAll(dto: PaginationDto & SearchDto & SortDto): Promise<{
         rows: {
+            description: string | null;
             id: number;
             slug: string;
-            description: string | null;
             createdAt: Date;
             updatedAt: Date;
             name: string;

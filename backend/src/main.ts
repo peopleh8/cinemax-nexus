@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { resolve } from 'node:path'
 import cookieParser from 'cookie-parser'
+import { setupSwagger } from './common/utils'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
@@ -27,6 +28,8 @@ async function bootstrap() {
   )
 
   app.setGlobalPrefix('api')
+
+  setupSwagger(app)
 
   await app.listen(process.env.PORT ?? 3000)
 }

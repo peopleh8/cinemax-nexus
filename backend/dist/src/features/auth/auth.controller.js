@@ -18,6 +18,9 @@ const auth_service_1 = require("./auth.service");
 const dto_1 = require("./dto");
 const decorators_1 = require("../../common/decorators");
 const guards_1 = require("../../common/guards");
+const swagger_1 = require("@nestjs/swagger");
+const user_response_dto_1 = require("./dto/response/user-response.dto");
+const logout_response_dto_1 = require("./dto/response/logout-response.dto");
 let AuthController = class AuthController {
     authService;
     constructor(authService) {
@@ -39,6 +42,12 @@ let AuthController = class AuthController {
 exports.AuthController = AuthController;
 __decorate([
     (0, common_1.Post)('register'),
+    (0, swagger_1.ApiOperation)({ summary: 'Register a new user' }),
+    (0, swagger_1.ApiCreatedResponse)({
+        description: 'The user has been successfully registered',
+        type: user_response_dto_1.UserResponseDto,
+    }),
+    (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Req)()),
     __param(2, (0, common_1.Res)({ passthrough: true })),
@@ -48,6 +57,12 @@ __decorate([
 ], AuthController.prototype, "register", null);
 __decorate([
     (0, common_1.Post)('login'),
+    (0, swagger_1.ApiOperation)({ summary: 'Login a user' }),
+    (0, swagger_1.ApiOkResponse)({
+        description: 'The user has been successfully logged in',
+        type: user_response_dto_1.UserResponseDto,
+    }),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Req)()),
     __param(2, (0, common_1.Res)({ passthrough: true })),
@@ -57,6 +72,12 @@ __decorate([
 ], AuthController.prototype, "login", null);
 __decorate([
     (0, common_1.Post)('logout'),
+    (0, swagger_1.ApiOperation)({ summary: 'Logout a user' }),
+    (0, swagger_1.ApiOkResponse)({
+        description: 'The user has been successfully logged out',
+        type: logout_response_dto_1.LogoutResponseDto,
+    }),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
@@ -66,6 +87,12 @@ __decorate([
 __decorate([
     (0, common_1.Get)('me'),
     (0, common_1.UseGuards)(guards_1.SessionGuard),
+    (0, swagger_1.ApiOperation)({ summary: 'Get the currently authenticated user' }),
+    (0, swagger_1.ApiOkResponse)({
+        description: 'The currently authenticated user',
+        type: user_response_dto_1.UserResponseDto,
+    }),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, decorators_1.Authorized)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -73,6 +100,7 @@ __decorate([
 ], AuthController.prototype, "me", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
+    (0, swagger_1.ApiTags)('Authentication'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthController);
 //# sourceMappingURL=auth.controller.js.map

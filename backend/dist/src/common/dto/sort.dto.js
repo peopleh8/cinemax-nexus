@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SortDto = void 0;
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../enums");
+const swagger_1 = require("@nestjs/swagger");
 class SortDto {
     sort;
 }
@@ -19,6 +20,11 @@ exports.SortDto = SortDto;
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEnum)(enums_1.Sort),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'The sort order for the results',
+        example: enums_1.Sort.ASC,
+        enum: enums_1.Sort,
+    }),
     __metadata("design:type", String)
 ], SortDto.prototype, "sort", void 0);
 //# sourceMappingURL=sort.dto.js.map

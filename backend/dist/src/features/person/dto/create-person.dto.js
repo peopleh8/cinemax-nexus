@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreatePersonDto = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class CreatePersonDto {
@@ -22,18 +23,30 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.Length)(1, 255),
+    (0, swagger_1.ApiProperty)({
+        description: 'The name of the person',
+        example: 'John Doe',
+    }),
     __metadata("design:type", String)
 ], CreatePersonDto.prototype, "name", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'A brief biography of the person',
+        example: 'John Doe is an actor known for his roles in various films.',
+    }),
     __metadata("design:type", String)
 ], CreatePersonDto.prototype, "bio", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_transformer_1.Type)(() => Date),
     (0, class_validator_1.IsDate)(),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'The birth date of the person',
+        example: '1980-01-01',
+    }),
     __metadata("design:type", Date)
 ], CreatePersonDto.prototype, "birthDate", void 0);
 //# sourceMappingURL=create-person.dto.js.map

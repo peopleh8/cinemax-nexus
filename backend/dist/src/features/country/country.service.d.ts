@@ -10,10 +10,10 @@ export declare class CountryService {
         rows: {
             name: string;
             id: number;
+            slug: string;
+            code: string;
             createdAt: Date;
             updatedAt: Date;
-            code: string;
-            slug: string;
         }[];
         total: number;
     }>;

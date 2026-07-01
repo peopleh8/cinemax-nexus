@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateMovieCreditInputDto = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 const enums_1 = require("../../../../generated/prisma/enums");
@@ -23,11 +24,19 @@ __decorate([
     (0, class_transformer_1.Type)(() => Number),
     (0, class_validator_1.IsInt)(),
     (0, class_validator_1.IsPositive)(),
+    (0, swagger_1.ApiProperty)({
+        description: 'The ID of the person associated with the credit',
+        example: 1,
+    }),
     __metadata("design:type", Number)
 ], CreateMovieCreditInputDto.prototype, "personId", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsEnum)(enums_1.CreditRole),
+    (0, swagger_1.ApiProperty)({
+        description: 'The role of the person in the movie',
+        example: enums_1.CreditRole.ACTOR,
+    }),
     __metadata("design:type", String)
 ], CreateMovieCreditInputDto.prototype, "role", void 0);
 //# sourceMappingURL=create-movie-credits-input.dto.js.map

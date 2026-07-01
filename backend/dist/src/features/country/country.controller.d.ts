@@ -1,51 +1,51 @@
 import { CountryService } from './country.service';
-import { PaginationDto, SearchDto, SortDto } from "../../common/dto";
+import { QueryDto } from "../../common/dto";
 import { CreateCountryDto } from './dto';
 import { UpdateCountryDto } from './dto';
 export declare class CountryController {
     private readonly countryService;
     constructor(countryService: CountryService);
     findOneBySlug(slug: string): Promise<{
-        name: string;
+        code: string;
         id: number;
         slug: string;
-        code: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
     }>;
-    findAll(dto: PaginationDto & SearchDto & SortDto): Promise<{
+    findAll(query: QueryDto): Promise<{
         rows: {
-            name: string;
+            code: string;
             id: number;
             slug: string;
-            code: string;
             createdAt: Date;
             updatedAt: Date;
+            name: string;
         }[];
         total: number;
     }>;
     create(dto: CreateCountryDto): Promise<{
-        name: string;
+        code: string;
         id: number;
         slug: string;
-        code: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
     }>;
     update(slug: string, dto: UpdateCountryDto): Promise<{
-        name: string;
+        code: string;
         id: number;
         slug: string;
-        code: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
     }>;
     delete(slug: string): Promise<{
-        name: string;
+        code: string;
         id: number;
         slug: string;
-        code: string;
         createdAt: Date;
         updatedAt: Date;
+        name: string;
     }>;
 }

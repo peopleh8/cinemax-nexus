@@ -9,11 +9,11 @@ export declare class GenreService {
     findAll(dto: PaginationDto & SearchDto & SortDto): Promise<{
         rows: {
             name: string;
+            description: string | null;
             id: number;
+            slug: string;
             createdAt: Date;
             updatedAt: Date;
-            description: string | null;
-            slug: string;
         }[];
         total: number;
     }>;

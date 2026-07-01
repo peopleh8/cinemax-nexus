@@ -15,12 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PersonController = void 0;
 const common_1 = require("@nestjs/common");
 const person_service_1 = require("./person.service");
-const dto_1 = require("./dto");
+const dto_1 = require("../../common/dto");
 const dto_2 = require("./dto");
+const response_1 = require("./dto/response");
+const dto_3 = require("./dto");
 const interceptors_1 = require("../../common/interceptors");
 const guards_1 = require("../../common/guards");
 const decorators_1 = require("../../common/decorators");
 const enums_1 = require("../../../generated/prisma/enums");
+const swagger_1 = require("@nestjs/swagger");
 let PersonController = class PersonController {
     personService;
     constructor(personService) {
@@ -45,6 +48,12 @@ let PersonController = class PersonController {
 exports.PersonController = PersonController;
 __decorate([
     (0, common_1.Get)(':slug'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get a person by slug' }),
+    (0, swagger_1.ApiOkResponse)({
+        type: response_1.ResponsePersonDto,
+        description: 'The person has been successfully retrieved.',
+    }),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, common_1.Param)('slug')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -53,34 +62,46 @@ __decorate([
 __decorate([
     (0, common_1.Get)(),
     (0, common_1.UseInterceptors)(interceptors_1.PaginationInterceptor),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all people' }),
+    (0, decorators_1.ApiPaginatedResponse)(response_1.ResponsePersonDto, 'The people have been successfully retrieved.'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [dto_1.QueryDto]),
     __metadata("design:returntype", void 0)
 ], PersonController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseGuards)(guards_1.SessionGuard, guards_1.RoleGuard),
     (0, decorators_1.Roles)(enums_1.UserRole.ADMIN, enums_1.UserRole.EDITOR),
+    (0, swagger_1.ApiOperation)({ summary: 'Create a new person' }),
+    (0, swagger_1.ApiCreatedResponse)({ type: response_1.ResponsePersonDto, description: 'The person has been successfully created.' }),
+    (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [dto_1.CreatePersonDto]),
+    __metadata("design:paramtypes", [dto_2.CreatePersonDto]),
     __metadata("design:returntype", void 0)
 ], PersonController.prototype, "create", null);
 __decorate([
     (0, common_1.Put)(':slug'),
     (0, common_1.UseGuards)(guards_1.SessionGuard, guards_1.RoleGuard),
     (0, decorators_1.Roles)(enums_1.UserRole.ADMIN, enums_1.UserRole.EDITOR),
+    (0, swagger_1.ApiOperation)({ summary: 'Update a person by slug' }),
+    (0, swagger_1.ApiOkResponse)({ type: response_1.ResponsePersonDto, description: 'The person has been successfully updated.' }),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, common_1.Param)('slug')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, dto_2.UpdatePersonDto]),
+    __metadata("design:paramtypes", [String, dto_3.UpdatePersonDto]),
     __metadata("design:returntype", void 0)
 ], PersonController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':slug'),
     (0, common_1.UseGuards)(guards_1.SessionGuard, guards_1.RoleGuard),
     (0, decorators_1.Roles)(enums_1.UserRole.ADMIN, enums_1.UserRole.EDITOR),
+    (0, swagger_1.ApiOperation)({ summary: 'Delete a person by slug' }),
+    (0, swagger_1.ApiOkResponse)({ type: response_1.ResponsePersonDto, description: 'The person has been successfully deleted.' }),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, common_1.Param)('slug')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -88,6 +109,7 @@ __decorate([
 ], PersonController.prototype, "delete", null);
 exports.PersonController = PersonController = __decorate([
     (0, common_1.Controller)('people'),
+    (0, swagger_1.ApiTags)('People'),
     __metadata("design:paramtypes", [person_service_1.PersonService])
 ], PersonController);
 //# sourceMappingURL=person.controller.js.map

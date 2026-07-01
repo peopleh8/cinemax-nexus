@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateGenreDto = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateGenreDto {
     name;
@@ -20,11 +21,19 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.Length)(2, 255),
+    (0, swagger_1.ApiProperty)({
+        description: 'The name of the genre',
+        example: 'Action',
+    }),
     __metadata("design:type", String)
 ], CreateGenreDto.prototype, "name", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
+    (0, swagger_1.ApiProperty)({
+        description: 'The description of the genre',
+        example: 'Action movies are characterized by a lot of excitement, physical activity, and fast-paced sequences.',
+    }),
     __metadata("design:type", String)
 ], CreateGenreDto.prototype, "description", void 0);
 //# sourceMappingURL=create-genre.dto.js.map

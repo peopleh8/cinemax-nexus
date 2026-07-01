@@ -109,7 +109,7 @@ let MovieService = class MovieService {
                     connect: countries,
                 },
                 credits: {
-                    create: credits.map((credit) => ({
+                    create: credits?.map((credit) => ({
                         personId: credit.personId,
                         role: credit.role,
                     })),

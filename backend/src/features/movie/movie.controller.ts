@@ -4,6 +4,8 @@ import {
   Delete,
   FileTypeValidator,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   ParseFilePipe,
   Post,
@@ -15,27 +17,37 @@ import {
 } from '@nestjs/common'
 import { MovieService } from './movie.service'
 import { CreateMovieDto, UpdateMovieDto } from './dto'
-import { PaginationDto, SearchDto, SortDto } from 'src/common/dto'
+import { QueryDto } from 'src/common/dto'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { MAX_IMAGE_SIZE } from 'src/common/constants'
 import { PaginationInterceptor, ParseMultipartJsonInterceptor } from 'src/common/interceptors'
 import type { UploadedFile as UploadedFileType } from 'src/common/types'
 import { RoleGuard, SessionGuard } from 'src/common/guards'
-import { Roles } from 'src/common/decorators'
+import { ApiPaginatedResponse, Roles } from 'src/common/decorators'
 import { UserRole } from 'generated/prisma/enums'
+import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
+import { ApiJsonFileUpload } from 'src/common/decorators/api-multipart-json-file.decorator'
+import { MovieResponseDto } from './dto/response'
 
 @Controller('movies')
+@ApiTags('Movies')
 export class MovieController {
   constructor(private readonly movieService: MovieService) {}
 
   @Get(':slug')
+  @ApiOperation({ summary: 'Get a movie by slug' })
+  @ApiOkResponse({ type: MovieResponseDto })
+  @HttpCode(HttpStatus.OK)
   findOneBySlug(@Param('slug') slug: string) {
     return this.movieService.findOneBySlug(slug)
   }
 
   @Get()
   @UseInterceptors(PaginationInterceptor)
-  findAll(@Query() query: PaginationDto & SearchDto & SortDto) {
+  @ApiOperation({ summary: 'Get all movies' })
+  @ApiPaginatedResponse(MovieResponseDto, 'The movies have been successfully retrieved.')
+  @HttpCode(HttpStatus.OK)
+  findAll(@Query() query: QueryDto) {
     return this.movieService.findAll(query)
   }
 
@@ -50,6 +62,13 @@ export class MovieController {
     }),
     new ParseMultipartJsonInterceptor('data'),
   )
+  @ApiOperation({ summary: 'Create a new movie' })
+  @ApiJsonFileUpload(CreateMovieDto, {
+    fileField: 'poster',
+    fileDescription: 'Movie poster: JPG, PNG or WEBP.',
+  })
+  @ApiCreatedResponse({ type: MovieResponseDto, description: 'The movie has been successfully created.' })
+  @HttpCode(HttpStatus.CREATED)
   create(
     @Body('data') dto: CreateMovieDto,
     @UploadedFile(
@@ -78,6 +97,13 @@ export class MovieController {
     }),
     new ParseMultipartJsonInterceptor('data'),
   )
+  @ApiOperation({ summary: 'Update a movie by slug' })
+  @ApiJsonFileUpload(UpdateMovieDto, {
+    fileField: 'poster',
+    fileDescription: 'Movie poster: JPG, PNG or WEBP.',
+  })
+  @ApiCreatedResponse({ type: MovieResponseDto, description: 'The movie has been successfully updated.' })
+  @HttpCode(HttpStatus.OK)
   update(
     @Param('slug') slug: string,
     @Body('data') dto: UpdateMovieDto,
@@ -99,6 +125,9 @@ export class MovieController {
   @Delete(':slug')
   @UseGuards(SessionGuard, RoleGuard)
   @Roles(UserRole.ADMIN, UserRole.EDITOR)
+  @ApiOperation({ summary: 'Delete a movie by slug' })
+  @ApiOkResponse({ type: MovieResponseDto, description: 'The movie has been successfully deleted.' })
+  @HttpCode(HttpStatus.OK)
   delete(@Param('slug') slug: string) {
     return this.movieService.delete(slug)
   }

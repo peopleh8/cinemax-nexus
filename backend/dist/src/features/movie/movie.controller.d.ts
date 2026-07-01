@@ -1,6 +1,6 @@
 import { MovieService } from './movie.service';
 import { CreateMovieDto, UpdateMovieDto } from './dto';
-import { PaginationDto, SearchDto, SortDto } from "../../common/dto";
+import { QueryDto } from "../../common/dto";
 import type { UploadedFile as UploadedFileType } from "../../common/types";
 export declare class MovieController {
     private readonly movieService;
@@ -15,28 +15,28 @@ export declare class MovieController {
             name: string;
         }[];
         countries: {
+            code: string;
             id: number;
             slug: string;
             createdAt: Date;
             updatedAt: Date;
             name: string;
-            code: string;
         }[];
         credits: {
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            movieId: number;
-            personId: number;
             role: import("generated/prisma/enums").CreditRole;
+            personId: number;
+            movieId: number;
         }[];
         poster: {
+            storageKey: string;
+            url: string;
             id: number;
             createdAt: Date;
             updatedAt: Date;
             movieId: number;
-            url: string;
-            storageKey: string;
         } | null;
     } & {
         id: number;
@@ -59,7 +59,7 @@ export declare class MovieController {
         createdAt: Date;
         updatedAt: Date;
     }>;
-    findAll(query: PaginationDto & SearchDto & SortDto): Promise<{
+    findAll(query: QueryDto): Promise<{
         rows: {
             id: number;
             slug: string;

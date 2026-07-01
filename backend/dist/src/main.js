@@ -8,6 +8,7 @@ const app_module_1 = require("./app.module");
 const common_1 = require("@nestjs/common");
 const node_path_1 = require("node:path");
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const utils_1 = require("./common/utils");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.use((0, cookie_parser_1.default)());
@@ -23,6 +24,7 @@ async function bootstrap() {
         transform: true,
     }));
     app.setGlobalPrefix('api');
+    (0, utils_1.setupSwagger)(app);
     await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

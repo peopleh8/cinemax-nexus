@@ -17,4 +17,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./pagination.dto"), exports);
 __exportStar(require("./search.dto"), exports);
 __exportStar(require("./sort.dto"), exports);
+__exportStar(require("./query.dto"), exports);
 //# sourceMappingURL=index.js.map

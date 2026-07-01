@@ -51,6 +51,15 @@ export class MovieController {
     return this.movieService.findAll(query)
   }
 
+  @Get('person/:slug')
+  @UseInterceptors(PaginationInterceptor)
+  @ApiOperation({ summary: 'Get all movies by person' })
+  @ApiPaginatedResponse(MovieResponseDto, 'The movies have been successfully retrieved.')
+  @HttpCode(HttpStatus.OK)
+  findAllByPerson(@Param('slug') slug: string, @Query() query: QueryDto) {
+    return this.movieService.findAllByPerson(slug, query)
+  }
+
   @Post()
   @UseGuards(SessionGuard, RoleGuard)
   @Roles(UserRole.ADMIN, UserRole.EDITOR)

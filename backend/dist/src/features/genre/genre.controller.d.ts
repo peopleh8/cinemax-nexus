@@ -6,46 +6,46 @@ export declare class GenreController {
     private readonly genreService;
     constructor(genreService: GenreService);
     findOneBySlug(slug: string): Promise<{
+        name: string;
         id: number;
-        slug: string;
-        description: string | null;
         createdAt: Date;
         updatedAt: Date;
-        name: string;
+        description: string | null;
+        slug: string;
     }>;
     findAll(query: QueryDto): Promise<{
         rows: {
+            name: string;
             id: number;
-            slug: string;
-            description: string | null;
             createdAt: Date;
             updatedAt: Date;
-            name: string;
+            description: string | null;
+            slug: string;
         }[];
         total: number;
     }>;
     create(dto: CreateGenreDto): Promise<{
+        name: string;
         id: number;
-        slug: string;
-        description: string | null;
         createdAt: Date;
         updatedAt: Date;
-        name: string;
+        description: string | null;
+        slug: string;
     }>;
     update(slug: string, dto: UpdateGenreDto): Promise<{
+        name: string;
         id: number;
-        slug: string;
-        description: string | null;
         createdAt: Date;
         updatedAt: Date;
-        name: string;
+        description: string | null;
+        slug: string;
     }>;
     delete(slug: string): Promise<{
+        name: string;
         id: number;
-        slug: string;
-        description: string | null;
         createdAt: Date;
         updatedAt: Date;
-        name: string;
+        description: string | null;
+        slug: string;
     }>;
 }

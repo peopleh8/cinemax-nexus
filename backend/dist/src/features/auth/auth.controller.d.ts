@@ -8,19 +8,19 @@ export declare class AuthController {
     register(dto: RegisterDto, request: Request, response: Response): Promise<{
         user: {
             id: number;
+            email: string;
+            role: import("../../../generated/prisma/enums").UserRole[];
             createdAt: Date;
             updatedAt: Date;
-            role: import("../../../generated/prisma/enums").UserRole[];
-            email: string;
         };
     }>;
     login(dto: LoginDto, request: Request, response: Response): Promise<{
         password: undefined;
         id: number;
+        email: string;
+        role: import("../../../generated/prisma/enums").UserRole[];
         createdAt: Date;
         updatedAt: Date;
-        role: import("../../../generated/prisma/enums").UserRole[];
-        email: string;
     }>;
     logout(request: Request, response: Response): Promise<{
         success: boolean;

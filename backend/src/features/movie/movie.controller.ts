@@ -10,6 +10,7 @@ import {
   Put,
   Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common'
 import { MovieService } from './movie.service'
@@ -19,6 +20,9 @@ import { FileInterceptor } from '@nestjs/platform-express'
 import { MAX_IMAGE_SIZE } from 'src/common/constants'
 import { PaginationInterceptor, ParseMultipartJsonInterceptor } from 'src/common/interceptors'
 import type { UploadedFile as UploadedFileType } from 'src/common/types'
+import { RoleGuard, SessionGuard } from 'src/common/guards'
+import { Roles } from 'src/common/decorators'
+import { UserRole } from 'generated/prisma/enums'
 
 @Controller('movies')
 export class MovieController {
@@ -36,6 +40,8 @@ export class MovieController {
   }
 
   @Post()
+  @UseGuards(SessionGuard, RoleGuard)
+  @Roles(UserRole.ADMIN, UserRole.EDITOR)
   @UseInterceptors(
     FileInterceptor('poster', {
       limits: {
@@ -62,6 +68,8 @@ export class MovieController {
   }
 
   @Put(':slug')
+  @UseGuards(SessionGuard, RoleGuard)
+  @Roles(UserRole.ADMIN, UserRole.EDITOR)
   @UseInterceptors(
     FileInterceptor('poster', {
       limits: {
@@ -89,6 +97,8 @@ export class MovieController {
   }
 
   @Delete(':slug')
+  @UseGuards(SessionGuard, RoleGuard)
+  @Roles(UserRole.ADMIN, UserRole.EDITOR)
   delete(@Param('slug') slug: string) {
     return this.movieService.delete(slug)
   }

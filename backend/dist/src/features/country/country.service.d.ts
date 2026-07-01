@@ -8,12 +8,12 @@ export declare class CountryService {
     findOneBySlug(slug: string): Promise<Country>;
     findAll(dto: PaginationDto & SearchDto & SortDto): Promise<{
         rows: {
-            code: string;
+            name: string;
             id: number;
-            slug: string;
             createdAt: Date;
             updatedAt: Date;
-            name: string;
+            code: string;
+            slug: string;
         }[];
         total: number;
     }>;

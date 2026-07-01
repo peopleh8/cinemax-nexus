@@ -8,11 +8,11 @@ export declare class PersonService {
     findOneBySlug(slug: string): Promise<Person>;
     findAll(dto: PaginationDto & SearchDto & SortDto): Promise<{
         rows: {
+            name: string;
             id: number;
-            slug: string;
             createdAt: Date;
             updatedAt: Date;
-            name: string;
+            slug: string;
             bio: string | null;
             birthDate: Date | null;
         }[];

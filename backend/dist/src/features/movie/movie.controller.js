@@ -19,6 +19,9 @@ const dto_1 = require("./dto");
 const platform_express_1 = require("@nestjs/platform-express");
 const constants_1 = require("../../common/constants");
 const interceptors_1 = require("../../common/interceptors");
+const guards_1 = require("../../common/guards");
+const decorators_1 = require("../../common/decorators");
+const enums_1 = require("../../../generated/prisma/enums");
 let MovieController = class MovieController {
     movieService;
     constructor(movieService) {
@@ -58,6 +61,8 @@ __decorate([
 ], MovieController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.UseGuards)(guards_1.SessionGuard, guards_1.RoleGuard),
+    (0, decorators_1.Roles)(enums_1.UserRole.ADMIN, enums_1.UserRole.EDITOR),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('poster', {
         limits: {
             fileSize: constants_1.MAX_IMAGE_SIZE,
@@ -78,6 +83,8 @@ __decorate([
 ], MovieController.prototype, "create", null);
 __decorate([
     (0, common_1.Put)(':slug'),
+    (0, common_1.UseGuards)(guards_1.SessionGuard, guards_1.RoleGuard),
+    (0, decorators_1.Roles)(enums_1.UserRole.ADMIN, enums_1.UserRole.EDITOR),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('poster', {
         limits: {
             fileSize: constants_1.MAX_IMAGE_SIZE,
@@ -99,6 +106,8 @@ __decorate([
 ], MovieController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':slug'),
+    (0, common_1.UseGuards)(guards_1.SessionGuard, guards_1.RoleGuard),
+    (0, decorators_1.Roles)(enums_1.UserRole.ADMIN, enums_1.UserRole.EDITOR),
     __param(0, (0, common_1.Param)('slug')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

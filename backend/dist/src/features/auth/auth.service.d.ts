@@ -8,30 +8,30 @@ export declare class AuthService {
     constructor(prismaService: PrismaService, configService: ConfigService);
     register(dto: RegisterDto, request: Request, response: Response): Promise<{
         user: {
+            id: number;
             email: string;
             role: import("../../../generated/prisma/enums").UserRole[];
             createdAt: Date;
             updatedAt: Date;
-            id: number;
         };
     }>;
     login(dto: LoginDto, request: Request, response: Response): Promise<{
         password: undefined;
+        id: number;
         email: string;
         role: import("../../../generated/prisma/enums").UserRole[];
         createdAt: Date;
         updatedAt: Date;
-        id: number;
     }>;
     logout(request: Request, response: Response): Promise<{
         success: boolean;
     }>;
     validateSession(sessionToken: string): Promise<{
+        id: number;
         email: string;
         role: import("../../../generated/prisma/enums").UserRole[];
         createdAt: Date;
         updatedAt: Date;
-        id: number;
     }>;
     private setSessionCookie;
     private clearSessionCookie;

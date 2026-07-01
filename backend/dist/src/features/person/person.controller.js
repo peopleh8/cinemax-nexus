@@ -18,6 +18,9 @@ const person_service_1 = require("./person.service");
 const dto_1 = require("./dto");
 const dto_2 = require("./dto");
 const interceptors_1 = require("../../common/interceptors");
+const guards_1 = require("../../common/guards");
+const decorators_1 = require("../../common/decorators");
+const enums_1 = require("../../../generated/prisma/enums");
 let PersonController = class PersonController {
     personService;
     constructor(personService) {
@@ -57,6 +60,8 @@ __decorate([
 ], PersonController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.UseGuards)(guards_1.SessionGuard, guards_1.RoleGuard),
+    (0, decorators_1.Roles)(enums_1.UserRole.ADMIN, enums_1.UserRole.EDITOR),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [dto_1.CreatePersonDto]),
@@ -64,6 +69,8 @@ __decorate([
 ], PersonController.prototype, "create", null);
 __decorate([
     (0, common_1.Put)(':slug'),
+    (0, common_1.UseGuards)(guards_1.SessionGuard, guards_1.RoleGuard),
+    (0, decorators_1.Roles)(enums_1.UserRole.ADMIN, enums_1.UserRole.EDITOR),
     __param(0, (0, common_1.Param)('slug')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -72,6 +79,8 @@ __decorate([
 ], PersonController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':slug'),
+    (0, common_1.UseGuards)(guards_1.SessionGuard, guards_1.RoleGuard),
+    (0, decorators_1.Roles)(enums_1.UserRole.ADMIN, enums_1.UserRole.EDITOR),
     __param(0, (0, common_1.Param)('slug')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

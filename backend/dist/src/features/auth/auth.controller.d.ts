@@ -7,20 +7,20 @@ export declare class AuthController {
     constructor(authService: AuthService);
     register(dto: RegisterDto, request: Request, response: Response): Promise<{
         user: {
+            id: number;
             email: string;
             role: import("../../../generated/prisma/enums").UserRole[];
             createdAt: Date;
             updatedAt: Date;
-            id: number;
         };
     }>;
     login(dto: LoginDto, request: Request, response: Response): Promise<{
         password: undefined;
+        id: number;
         email: string;
         role: import("../../../generated/prisma/enums").UserRole[];
         createdAt: Date;
         updatedAt: Date;
-        id: number;
     }>;
     logout(request: Request, response: Response): Promise<{
         success: boolean;

@@ -9,13 +9,21 @@ export declare class MovieService {
     private readonly storageService;
     constructor(prismaService: PrismaService, storageService: StorageService);
     findOneBySlug(slug: string, isForAdmin?: boolean): Promise<{
+        credits: {
+            id: number;
+            role: import("generated/prisma/client").CreditRole;
+            createdAt: Date;
+            updatedAt: Date;
+            personId: number;
+            movieId: number;
+        }[];
         genres: {
             name: string;
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            slug: string;
             description: string | null;
+            slug: string;
         }[];
         countries: {
             name: string;
@@ -25,41 +33,33 @@ export declare class MovieService {
             code: string;
             slug: string;
         }[];
-        credits: {
-            id: number;
-            role: import("generated/prisma/client").CreditRole;
-            createdAt: Date;
-            updatedAt: Date;
-            personId: number;
-            movieId: number;
-        }[];
         poster: {
+            url: string;
             id: number;
             createdAt: Date;
             updatedAt: Date;
             storageKey: string;
-            url: string;
             movieId: number;
         } | null;
     } & {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        slug: string;
         title: string;
         originalTitle: string | null;
-        excerpt: string | null;
         description: string | null;
         releaseDate: Date | null;
         releaseYear: number | null;
-        duration: number | null;
         ageRating: string;
         status: MovieStatus;
+        isFeatured: boolean;
+        slug: string;
+        excerpt: string | null;
+        duration: number | null;
         ratingAverage: import("@prisma/client-runtime-utils").Decimal;
         ratingCount: number;
         reviewCount: number;
         viewCount: number;
-        isFeatured: boolean;
         publishedAt: Date | null;
     }>;
     findAll(dto: PaginationDto & SearchDto & SortDto, isForAdmin?: boolean): Promise<{
@@ -67,21 +67,21 @@ export declare class MovieService {
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            slug: string;
             title: string;
             originalTitle: string | null;
-            excerpt: string | null;
             description: string | null;
             releaseDate: Date | null;
             releaseYear: number | null;
-            duration: number | null;
             ageRating: string;
             status: MovieStatus;
+            isFeatured: boolean;
+            slug: string;
+            excerpt: string | null;
+            duration: number | null;
             ratingAverage: import("@prisma/client-runtime-utils").Decimal;
             ratingCount: number;
             reviewCount: number;
             viewCount: number;
-            isFeatured: boolean;
             publishedAt: Date | null;
         }[];
         total: number;

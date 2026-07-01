@@ -7,41 +7,39 @@ export declare class MovieController {
     constructor(movieService: MovieService);
     findOneBySlug(slug: string): Promise<{
         genres: {
-            name: string;
             id: number;
-            createdAt: Date;
-            updatedAt: Date;
             slug: string;
             description: string | null;
-        }[];
-        countries: {
-            name: string;
-            id: number;
             createdAt: Date;
             updatedAt: Date;
-            code: string;
+            name: string;
+        }[];
+        countries: {
+            id: number;
             slug: string;
+            createdAt: Date;
+            updatedAt: Date;
+            name: string;
+            code: string;
         }[];
         credits: {
             id: number;
-            role: import("../../../generated/prisma/enums").CreditRole;
             createdAt: Date;
             updatedAt: Date;
-            personId: number;
             movieId: number;
+            personId: number;
+            role: import("generated/prisma/enums").CreditRole;
         }[];
         poster: {
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            storageKey: string;
-            url: string;
             movieId: number;
+            url: string;
+            storageKey: string;
         } | null;
     } & {
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
         slug: string;
         title: string;
         originalTitle: string | null;
@@ -51,19 +49,19 @@ export declare class MovieController {
         releaseYear: number | null;
         duration: number | null;
         ageRating: string;
-        status: import("../../../generated/prisma/enums").MovieStatus;
+        status: import("generated/prisma/enums").MovieStatus;
         ratingAverage: import("@prisma/client-runtime-utils").Decimal;
         ratingCount: number;
         reviewCount: number;
         viewCount: number;
         isFeatured: boolean;
         publishedAt: Date | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     findAll(query: PaginationDto & SearchDto & SortDto): Promise<{
         rows: {
             id: number;
-            createdAt: Date;
-            updatedAt: Date;
             slug: string;
             title: string;
             originalTitle: string | null;
@@ -73,20 +71,20 @@ export declare class MovieController {
             releaseYear: number | null;
             duration: number | null;
             ageRating: string;
-            status: import("../../../generated/prisma/enums").MovieStatus;
+            status: import("generated/prisma/enums").MovieStatus;
             ratingAverage: import("@prisma/client-runtime-utils").Decimal;
             ratingCount: number;
             reviewCount: number;
             viewCount: number;
             isFeatured: boolean;
             publishedAt: Date | null;
+            createdAt: Date;
+            updatedAt: Date;
         }[];
         total: number;
     }>;
     create(dto: CreateMovieDto, poster?: UploadedFileType): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
         slug: string;
         title: string;
         originalTitle: string | null;
@@ -96,18 +94,18 @@ export declare class MovieController {
         releaseYear: number | null;
         duration: number | null;
         ageRating: string;
-        status: import("../../../generated/prisma/enums").MovieStatus;
+        status: import("generated/prisma/enums").MovieStatus;
         ratingAverage: import("@prisma/client-runtime-utils").Decimal;
         ratingCount: number;
         reviewCount: number;
         viewCount: number;
         isFeatured: boolean;
         publishedAt: Date | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     update(slug: string, dto: UpdateMovieDto, poster?: UploadedFileType): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
         slug: string;
         title: string;
         originalTitle: string | null;
@@ -117,18 +115,18 @@ export declare class MovieController {
         releaseYear: number | null;
         duration: number | null;
         ageRating: string;
-        status: import("../../../generated/prisma/enums").MovieStatus;
+        status: import("generated/prisma/enums").MovieStatus;
         ratingAverage: import("@prisma/client-runtime-utils").Decimal;
         ratingCount: number;
         reviewCount: number;
         viewCount: number;
         isFeatured: boolean;
         publishedAt: Date | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     delete(slug: string): Promise<{
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
         slug: string;
         title: string;
         originalTitle: string | null;
@@ -138,12 +136,14 @@ export declare class MovieController {
         releaseYear: number | null;
         duration: number | null;
         ageRating: string;
-        status: import("../../../generated/prisma/enums").MovieStatus;
+        status: import("generated/prisma/enums").MovieStatus;
         ratingAverage: import("@prisma/client-runtime-utils").Decimal;
         ratingCount: number;
         reviewCount: number;
         viewCount: number;
         isFeatured: boolean;
         publishedAt: Date | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
 }

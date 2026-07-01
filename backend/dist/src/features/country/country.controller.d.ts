@@ -6,46 +6,46 @@ export declare class CountryController {
     private readonly countryService;
     constructor(countryService: CountryService);
     findOneBySlug(slug: string): Promise<{
-        code: string;
+        name: string;
         id: number;
         slug: string;
+        code: string;
         createdAt: Date;
         updatedAt: Date;
-        name: string;
     }>;
     findAll(dto: PaginationDto & SearchDto & SortDto): Promise<{
         rows: {
-            code: string;
+            name: string;
             id: number;
             slug: string;
+            code: string;
             createdAt: Date;
             updatedAt: Date;
-            name: string;
         }[];
         total: number;
     }>;
     create(dto: CreateCountryDto): Promise<{
-        code: string;
+        name: string;
         id: number;
         slug: string;
+        code: string;
         createdAt: Date;
         updatedAt: Date;
-        name: string;
     }>;
     update(slug: string, dto: UpdateCountryDto): Promise<{
-        code: string;
+        name: string;
         id: number;
         slug: string;
+        code: string;
         createdAt: Date;
         updatedAt: Date;
-        name: string;
     }>;
     delete(slug: string): Promise<{
-        code: string;
+        name: string;
         id: number;
         slug: string;
+        code: string;
         createdAt: Date;
         updatedAt: Date;
-        name: string;
     }>;
 }

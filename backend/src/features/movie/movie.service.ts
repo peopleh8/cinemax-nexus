@@ -1,22 +1,19 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/infra/prisma/prisma.service'
-import { CreateMovieDto, UpdateMovieDto } from './dto'
+import { CreateMovieDto, MovieQueryDto, UpdateMovieDto } from './dto'
 import { Movie, MovieStatus } from 'generated/prisma/client'
-import { QueryDto } from 'src/common/dto'
 import { Sort } from 'src/common/enums'
 import { generateUniqueSlug } from 'src/common/utils'
 import type { StoredFile, UploadedFile } from 'src/common/types'
 import { StorageService } from 'src/infra/storage/storage.service'
 import { StorageFolder } from 'src/common/constants'
 import { MovieWhereInput } from 'generated/prisma/models'
-import { PersonService } from '../person/person.service'
 
 @Injectable()
 export class MovieService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly storageService: StorageService,
-    private readonly personService: PersonService,
   ) {}
 
   async findOneBySlug(slug: string, isForAdmin = false) {
@@ -37,13 +34,24 @@ export class MovieService {
     return movie
   }
 
-  async findAll(query: QueryDto, isForAdmin = false) {
-    const { page = 1, limit = 20, sort = Sort.DESC, search } = query
+  async findAll(query: MovieQueryDto, isForAdmin = false) {
+    const { page = 1, limit = 20, sort = Sort.DESC, search, country, genre, person } = query
     const skip = (page - 1) * limit
+
+    const [people, genres, countries] = [person, genre, country].map(
+      (value) =>
+        value
+          ?.split(',')
+          .map((item) => item.trim())
+          .filter(Boolean) ?? [],
+    )
 
     const where = {
       ...(isForAdmin ? {} : { status: MovieStatus.PUBLISHED }),
       ...(search ? { title: { contains: search, mode: 'insensitive' } } : {}),
+      ...(people.length > 0 ? { credits: { some: { person: { slug: { in: people } } } } } : {}),
+      ...(genres.length > 0 ? { genres: { some: { slug: { in: genres } } } } : {}),
+      ...(countries.length > 0 ? { countries: { some: { slug: { in: countries } } } } : {}),
     } as MovieWhereInput
 
     const [movies, total] = await this.prismaService.$transaction([
@@ -53,56 +61,6 @@ export class MovieService {
         where,
         orderBy: {
           createdAt: sort,
-        },
-      }),
-      this.prismaService.movie.count({
-        where,
-      }),
-    ])
-
-    return {
-      rows: movies,
-      total,
-    }
-  }
-
-  async findAllByPerson(slug: string, query: QueryDto, isForAdmin = false) {
-    const { page = 1, limit = 20, sort = Sort.DESC, search } = query
-    const skip = (page - 1) * limit
-
-    const person = await this.personService.findOneBySlug(slug)
-
-    const where: MovieWhereInput = {
-      ...(isForAdmin ? {} : { status: MovieStatus.PUBLISHED }),
-      ...(search
-        ? {
-            title: {
-              contains: search,
-              mode: 'insensitive',
-            },
-          }
-        : {}),
-      credits: {
-        some: {
-          personId: person.id,
-        },
-      },
-    }
-
-    const [movies, total] = await this.prismaService.$transaction([
-      this.prismaService.movie.findMany({
-        skip,
-        take: limit,
-        where,
-        orderBy: {
-          createdAt: sort,
-        },
-        include: {
-          credits: {
-            where: {
-              personId: person.id,
-            },
-          },
         },
       }),
       this.prismaService.movie.count({

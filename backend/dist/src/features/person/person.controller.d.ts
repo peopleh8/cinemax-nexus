@@ -10,9 +10,9 @@ export declare class PersonController {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        slug: string;
         bio: string | null;
         birthDate: Date | null;
+        slug: string;
     }>;
     findAll(query: QueryDto): Promise<{
         rows: {
@@ -20,9 +20,9 @@ export declare class PersonController {
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            slug: string;
             bio: string | null;
             birthDate: Date | null;
+            slug: string;
         }[];
         total: number;
     }>;
@@ -31,26 +31,26 @@ export declare class PersonController {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        slug: string;
         bio: string | null;
         birthDate: Date | null;
+        slug: string;
     }>;
     update(slug: string, dto: UpdatePersonDto): Promise<{
         name: string;
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        slug: string;
         bio: string | null;
         birthDate: Date | null;
+        slug: string;
     }>;
     delete(slug: string): Promise<{
         name: string;
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        slug: string;
         bio: string | null;
         birthDate: Date | null;
+        slug: string;
     }>;
 }

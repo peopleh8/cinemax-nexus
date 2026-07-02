@@ -16,7 +16,6 @@ exports.MovieController = void 0;
 const common_1 = require("@nestjs/common");
 const movie_service_1 = require("./movie.service");
 const dto_1 = require("./dto");
-const dto_2 = require("../../common/dto");
 const platform_express_1 = require("@nestjs/platform-express");
 const constants_1 = require("../../common/constants");
 const interceptors_1 = require("../../common/interceptors");
@@ -36,9 +35,6 @@ let MovieController = class MovieController {
     }
     findAll(query) {
         return this.movieService.findAll(query);
-    }
-    findAllByPerson(slug, query) {
-        return this.movieService.findAllByPerson(slug, query);
     }
     create(dto, poster) {
         return this.movieService.create(dto, poster);
@@ -69,21 +65,9 @@ __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [dto_2.QueryDto]),
+    __metadata("design:paramtypes", [dto_1.MovieQueryDto]),
     __metadata("design:returntype", void 0)
 ], MovieController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Get)('person/:slug'),
-    (0, common_1.UseInterceptors)(interceptors_1.PaginationInterceptor),
-    (0, swagger_1.ApiOperation)({ summary: 'Get all movies by person' }),
-    (0, decorators_1.ApiPaginatedResponse)(response_1.MovieResponseDto, 'The movies have been successfully retrieved.'),
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    __param(0, (0, common_1.Param)('slug')),
-    __param(1, (0, common_1.Query)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, dto_2.QueryDto]),
-    __metadata("design:returntype", void 0)
-], MovieController.prototype, "findAllByPerson", null);
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseGuards)(guards_1.SessionGuard, guards_1.RoleGuard),

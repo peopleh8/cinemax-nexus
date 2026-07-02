@@ -17,15 +17,12 @@ const enums_1 = require("../../common/enums");
 const utils_1 = require("../../common/utils");
 const storage_service_1 = require("../../infra/storage/storage.service");
 const constants_1 = require("../../common/constants");
-const person_service_1 = require("../person/person.service");
 let MovieService = class MovieService {
     prismaService;
     storageService;
-    personService;
-    constructor(prismaService, storageService, personService) {
+    constructor(prismaService, storageService) {
         this.prismaService = prismaService;
         this.storageService = storageService;
-        this.personService = personService;
     }
     async findOneBySlug(slug, isForAdmin = false) {
         const movie = await this.prismaService.movie.findFirst({
@@ -43,11 +40,18 @@ let MovieService = class MovieService {
         return movie;
     }
     async findAll(query, isForAdmin = false) {
-        const { page = 1, limit = 20, sort = enums_1.Sort.DESC, search } = query;
+        const { page = 1, limit = 20, sort = enums_1.Sort.DESC, search, country, genre, person } = query;
         const skip = (page - 1) * limit;
+        const [people, genres, countries] = [person, genre, country].map((value) => value
+            ?.split(',')
+            .map((item) => item.trim())
+            .filter(Boolean) ?? []);
         const where = {
             ...(isForAdmin ? {} : { status: client_1.MovieStatus.PUBLISHED }),
             ...(search ? { title: { contains: search, mode: 'insensitive' } } : {}),
+            ...(people.length > 0 ? { credits: { some: { person: { slug: { in: people } } } } } : {}),
+            ...(genres.length > 0 ? { genres: { some: { slug: { in: genres } } } } : {}),
+            ...(countries.length > 0 ? { countries: { some: { slug: { in: countries } } } } : {}),
         };
         const [movies, total] = await this.prismaService.$transaction([
             this.prismaService.movie.findMany({
@@ -56,51 +60,6 @@ let MovieService = class MovieService {
                 where,
                 orderBy: {
                     createdAt: sort,
-                },
-            }),
-            this.prismaService.movie.count({
-                where,
-            }),
-        ]);
-        return {
-            rows: movies,
-            total,
-        };
-    }
-    async findAllByPerson(slug, query, isForAdmin = false) {
-        const { page = 1, limit = 20, sort = enums_1.Sort.DESC, search } = query;
-        const skip = (page - 1) * limit;
-        const person = await this.personService.findOneBySlug(slug);
-        const where = {
-            ...(isForAdmin ? {} : { status: client_1.MovieStatus.PUBLISHED }),
-            ...(search
-                ? {
-                    title: {
-                        contains: search,
-                        mode: 'insensitive',
-                    },
-                }
-                : {}),
-            credits: {
-                some: {
-                    personId: person.id,
-                },
-            },
-        };
-        const [movies, total] = await this.prismaService.$transaction([
-            this.prismaService.movie.findMany({
-                skip,
-                take: limit,
-                where,
-                orderBy: {
-                    createdAt: sort,
-                },
-                include: {
-                    credits: {
-                        where: {
-                            personId: person.id,
-                        },
-                    },
                 },
             }),
             this.prismaService.movie.count({
@@ -320,7 +279,6 @@ exports.MovieService = MovieService;
 exports.MovieService = MovieService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService,
-        storage_service_1.StorageService,
-        person_service_1.PersonService])
+        storage_service_1.StorageService])
 ], MovieService);
 //# sourceMappingURL=movie.service.js.map

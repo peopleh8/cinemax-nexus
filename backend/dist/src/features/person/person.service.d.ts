@@ -12,9 +12,9 @@ export declare class PersonService {
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            slug: string;
             bio: string | null;
             birthDate: Date | null;
+            slug: string;
         }[];
         total: number;
     }>;

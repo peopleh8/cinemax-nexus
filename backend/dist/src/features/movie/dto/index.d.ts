@@ -1,3 +1,5 @@
 export * from './create-movie-credits-input.dto';
 export * from './create-movie.dto';
 export * from './update-movie.dto';
+export * from './movie-filter.dto';
+export * from './movie-query.dto';

@@ -17,4 +17,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./create-movie-credits-input.dto"), exports);
 __exportStar(require("./create-movie.dto"), exports);
 __exportStar(require("./update-movie.dto"), exports);
+__exportStar(require("./movie-filter.dto"), exports);
+__exportStar(require("./movie-query.dto"), exports);
 //# sourceMappingURL=index.js.map

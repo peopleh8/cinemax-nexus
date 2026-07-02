@@ -16,8 +16,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common'
 import { MovieService } from './movie.service'
-import { CreateMovieDto, UpdateMovieDto } from './dto'
-import { QueryDto } from 'src/common/dto'
+import { CreateMovieDto, MovieQueryDto, UpdateMovieDto } from './dto'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { MAX_IMAGE_SIZE } from 'src/common/constants'
 import { PaginationInterceptor, ParseMultipartJsonInterceptor } from 'src/common/interceptors'
@@ -47,17 +46,8 @@ export class MovieController {
   @ApiOperation({ summary: 'Get all movies' })
   @ApiPaginatedResponse(MovieResponseDto, 'The movies have been successfully retrieved.')
   @HttpCode(HttpStatus.OK)
-  findAll(@Query() query: QueryDto) {
+  findAll(@Query() query: MovieQueryDto) {
     return this.movieService.findAll(query)
-  }
-
-  @Get('person/:slug')
-  @UseInterceptors(PaginationInterceptor)
-  @ApiOperation({ summary: 'Get all movies by person' })
-  @ApiPaginatedResponse(MovieResponseDto, 'The movies have been successfully retrieved.')
-  @HttpCode(HttpStatus.OK)
-  findAllByPerson(@Param('slug') slug: string, @Query() query: QueryDto) {
-    return this.movieService.findAllByPerson(slug, query)
   }
 
   @Post()

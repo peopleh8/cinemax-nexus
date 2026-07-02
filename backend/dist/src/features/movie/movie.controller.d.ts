@@ -1,6 +1,5 @@
 import { MovieService } from './movie.service';
-import { CreateMovieDto, UpdateMovieDto } from './dto';
-import { QueryDto } from "../../common/dto";
+import { CreateMovieDto, MovieQueryDto, UpdateMovieDto } from './dto';
 import type { UploadedFile as UploadedFileType } from "../../common/types";
 export declare class MovieController {
     private readonly movieService;
@@ -59,7 +58,7 @@ export declare class MovieController {
         createdAt: Date;
         updatedAt: Date;
     }>;
-    findAll(query: QueryDto): Promise<{
+    findAll(query: MovieQueryDto): Promise<{
         rows: {
             id: number;
             slug: string;
@@ -81,39 +80,6 @@ export declare class MovieController {
             createdAt: Date;
             updatedAt: Date;
         }[];
-        total: number;
-    }>;
-    findAllByPerson(slug: string, query: QueryDto): Promise<{
-        rows: ({
-            credits: {
-                id: number;
-                createdAt: Date;
-                updatedAt: Date;
-                movieId: number;
-                personId: number;
-                role: import("generated/prisma/enums").CreditRole;
-            }[];
-        } & {
-            id: number;
-            slug: string;
-            title: string;
-            originalTitle: string | null;
-            excerpt: string | null;
-            description: string | null;
-            releaseDate: Date | null;
-            releaseYear: number | null;
-            duration: number | null;
-            ageRating: string;
-            status: import("generated/prisma/enums").MovieStatus;
-            ratingAverage: import("@prisma/client-runtime-utils").Decimal;
-            ratingCount: number;
-            reviewCount: number;
-            viewCount: number;
-            isFeatured: boolean;
-            publishedAt: Date | null;
-            createdAt: Date;
-            updatedAt: Date;
-        })[];
         total: number;
     }>;
     create(dto: CreateMovieDto, poster?: UploadedFileType): Promise<{
